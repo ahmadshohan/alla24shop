@@ -4,6 +4,7 @@ import 'package:alla24/account/register/register_page.dart';
 import 'package:alla24/app_route.dart';
 import 'package:alla24/colors.dart';
 import 'package:alla24/main/main_navigator.dart';
+import 'package:alla24/product/product_detail/product_details_page.dart';
 import 'package:alla24/provider/products.dart';
 import 'package:alla24/splash/splash_page.dart';
 import 'package:flutter/material.dart';
@@ -49,6 +50,7 @@ class Alla24AppState extends State<Alla24App> {
             AppRoute.loginRoute: (ctx) => LoginPage(),
             AppRoute.forgotPasswordRoute: (ctx) => ForgotPasswordPage(),
             AppRoute.mainRoute: (ctx) => MainNavigator(),
+            AppRoute.productDetailRoute: (ctx) => ProductDetails(),
             // AppRoute.settingsRoute: (ctx) => SettingsPage(),
             // AppRoute.aboutUsRoute: (ctx) => AboutUsPage(),
             // AppRoute.profileRoute: (ctx) => ProfilePage(),

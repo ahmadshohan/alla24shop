@@ -1,3 +1,5 @@
+import 'dart:ffi';
+
 import 'package:alla24/account/register/register_controller.dart';
 import 'package:alla24/app_route.dart';
 import 'package:alla24/colors.dart';
@@ -212,7 +214,7 @@ class _RegisterPageState extends State<RegisterPage> {
                             ))),
                     Text('أختر محافظة',
                         style: TextStyle(color: Colors.black, fontSize: 17)),
-                    // Observer(builder: (_) => _androidCityDropDownButton()),
+                    _androidCityDropDownButton(),
                     /*todo dropbox citiys*/
                     Text('كلمة السر',
                         style: TextStyle(color: Colors.black, fontSize: 17)),
@@ -322,20 +324,22 @@ class _RegisterPageState extends State<RegisterPage> {
             ]))));
   }
 
-  DropdownButton<String> _androidCityDropDownButton() {
+  _androidCityDropDownButton() {
     List<DropdownMenuItem<String>> dropDownItems = [];
     for (String city in cityList) {
       var newItem = DropdownMenuItem(
-        child: Text(city),
-        value: city,
-      );
+          child: Text(city, overflow: TextOverflow.ellipsis), value: city);
       dropDownItems.add(newItem);
     }
-    return DropdownButton<String>(
-        onChanged: (selectedCity) {
-          _registerController.selectedCity(selectedCity);
-        },
-        value: _registerController.city,
-        items: dropDownItems);
+    return Directionality(
+        textDirection: TextDirection.rtl,
+        child: DropdownButton<String>(
+            isExpanded: true,
+            elevation: 7,
+            onChanged: (selectedCity) {
+              _registerController.selectedCity(selectedCity);
+            },
+            value: _registerController.city,
+            items: dropDownItems));
   }
 }

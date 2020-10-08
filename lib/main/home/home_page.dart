@@ -1,3 +1,5 @@
+import 'package:alla24/app_route.dart';
+import 'package:alla24/shared/widgets/single_product.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:alla24/colors.dart';
@@ -120,25 +122,24 @@ class _HomePageState extends State<HomePage>
 
   _buildFullAppBar() {
     return AppBar(
-      backgroundColor: Alla24Colors.button,
-      leading: IconButton(
-        icon: Icon(
-          EvaIcons.menu,
-          color: Alla24Colors.white,
-        ),
-        onPressed: () {},
-      ),
-      title: _buildSearchField(),
-      actions: [
-        IconButton(
+        backgroundColor: Alla24Colors.button,
+        leading: IconButton(
           icon: Icon(
-            Icons.filter_list,
+            EvaIcons.menu,
             color: Alla24Colors.white,
           ),
           onPressed: () {},
         ),
-      ],
-    );
+        title: _buildSearchField(),
+        actions: [
+          IconButton(
+            icon: Icon(
+              Icons.filter_list,
+              color: Alla24Colors.white,
+            ),
+            onPressed: () {},
+          )
+        ]);
   }
 
   _buildSliderCarousel() {
@@ -257,95 +258,8 @@ class _HomePageState extends State<HomePage>
                 itemBuilder: (ctx, index) => Container(
                     width: MediaQuery.of(context).size.width * 0.4,
                     padding: EdgeInsets.symmetric(horizontal: 5, vertical: 10),
-                    child: Card(
-                        child: Padding(
-                            padding: const EdgeInsets.all(3),
-                            child: Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: <Widget>[
-                                  Expanded(
-                                      child: Card(
-                                          elevation: 5,
-                                          color: Alla24Colors.cardItemBg,
-                                          child: Column(
-                                              crossAxisAlignment:
-                                                  CrossAxisAlignment.start,
-                                              children: [
-                                                IconButton(
-                                                    icon: Icon(
-                                                        products[index]
-                                                                .isFavorite
-                                                            ? Icons.favorite
-                                                            : Icons
-                                                                .favorite_border,
-                                                        color: products[index]
-                                                                .isFavorite
-                                                            ? Colors.red
-                                                            : Colors.black),
-                                                    onPressed: () => products[
-                                                            index]
-                                                        .toggleFavoriteStatus()),
-                                                Expanded(
-                                                    child: Row(children: [
-                                                  Expanded(
-                                                      child: Image.asset(
-                                                    products[index].image,
-                                                    fit: BoxFit.contain,
-                                                  ))
-                                                ])),
-                                              ]))),
-                                  Text('حقيبة ظهر'),
-                                  Row(children: [
-                                    Expanded(
-                                      child: Text(
-                                        "${products[index].currentPrice.toString()} دع",
-                                        style: TextStyle(
-                                            fontSize: 14,
-                                            color: Alla24Colors.button),
-                                        // fontSize: product.isSelected ? 18 : 16,
-                                      ),
-                                    ),
-                                    SizedBox(width: 15),
-                                    Expanded(
-                                      child: Text(
-                                        products[index].oldPrice.toString(),
-                                        style: TextStyle(
-                                            fontSize: 9,
-                                            decoration:
-                                                TextDecoration.lineThrough),
-                                      ),
-                                    )
-                                  ]),
-                                  Row(children: [
-                                    Expanded(
-                                        child: SizedBox(
-                                            height: 30,
-                                            child: RaisedButton(
-                                              child: Text(
-                                                "اشتري الآن",
-                                                style: TextStyle(fontSize: 13),
-                                              ),
-                                              padding:
-                                                  const EdgeInsets.symmetric(
-                                                      vertical: 5),
-                                              color: Alla24Colors.button,
-                                              textColor: Alla24Colors.white,
-                                              shape: RoundedRectangleBorder(
-                                                  borderRadius:
-                                                      BorderRadius.circular(
-                                                          12)),
-                                              onPressed: () {},
-                                            ))),
-                                    SizedBox(width: 20),
-                                    Expanded(
-                                        child: Text(
-                                      'خصم %8',
-                                      style: TextStyle(
-                                          fontSize: 12,
-                                          color: Alla24Colors.button),
-                                    ))
-                                  ])
-                                ]))))),
+                    child: ChangeNotifierProvider.value(
+                        value: products[index], child: SingleProduct()))),
           )
         ]));
   }
@@ -366,94 +280,8 @@ class _HomePageState extends State<HomePage>
                 itemBuilder: (ctx, index) => Container(
                     width: MediaQuery.of(context).size.width * 0.4,
                     padding: EdgeInsets.symmetric(horizontal: 5, vertical: 10),
-                    child: Card(
-                      child: Padding(
-                        padding: const EdgeInsets.all(3),
-                        child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: <Widget>[
-                              Expanded(
-                                  child: Card(
-                                      elevation: 5,
-                                      color: Alla24Colors.cardItemBg,
-                                      child: Column(
-                                          crossAxisAlignment:
-                                              CrossAxisAlignment.start,
-                                          children: [
-                                            IconButton(
-                                                icon: Icon(
-                                                    products[index].isFavorite
-                                                        ? Icons.favorite
-                                                        : Icons.favorite_border,
-                                                    color: products[index]
-                                                            .isFavorite
-                                                        ? Colors.red
-                                                        : Colors.black),
-                                                onPressed: () => products[index]
-                                                    .toggleFavoriteStatus()),
-                                            Expanded(
-                                                child: Row(children: [
-                                              Expanded(
-                                                  child: Image.asset(
-                                                products[index].image,
-                                                fit: BoxFit.contain,
-                                              ))
-                                            ])),
-                                          ]))),
-                              Text('حقيبة ظهر'),
-                              Row(children: [
-                                Expanded(
-                                  child: Text(
-                                    "${products[index].currentPrice.toString()} دع",
-                                    style: TextStyle(
-                                        fontSize: 14,
-                                        color: Alla24Colors.button),
-                                    // fontSize: product.isSelected ? 18 : 16,
-                                  ),
-                                ),
-                                SizedBox(width: 15),
-                                Expanded(
-                                  child: Text(
-                                    products[index].oldPrice.toString(),
-                                    style: TextStyle(
-                                        fontSize: 9,
-                                        decoration: TextDecoration.lineThrough),
-                                  ),
-                                )
-                              ]),
-                              Row(children: [
-                                Expanded(
-                                  child: SizedBox(
-                                    height: 30,
-                                    child: RaisedButton(
-                                      child: Text(
-                                        "اشتري الآن",
-                                        style: TextStyle(fontSize: 13),
-                                      ),
-                                      padding: const EdgeInsets.symmetric(
-                                          vertical: 5),
-                                      color: Alla24Colors.button,
-                                      textColor: Alla24Colors.white,
-                                      shape: RoundedRectangleBorder(
-                                          borderRadius:
-                                              BorderRadius.circular(12)),
-                                      onPressed: () {},
-                                    ),
-                                  ),
-                                ),
-                                SizedBox(width: 20),
-                                Expanded(
-                                  child: Text(
-                                    'خصم %8',
-                                    style: TextStyle(
-                                        fontSize: 12,
-                                        color: Alla24Colors.button),
-                                  ),
-                                )
-                              ]),
-                            ]),
-                      ),
-                    ))),
+                    child: ChangeNotifierProvider.value(
+                        value: products[index], child: SingleProduct()))),
           )
         ]));
   }
@@ -474,94 +302,8 @@ class _HomePageState extends State<HomePage>
                 itemBuilder: (ctx, index) => Container(
                     width: MediaQuery.of(context).size.width * 0.4,
                     padding: EdgeInsets.symmetric(horizontal: 5, vertical: 10),
-                    child: Card(
-                      child: Padding(
-                        padding: const EdgeInsets.all(3),
-                        child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: <Widget>[
-                              Expanded(
-                                  child: Card(
-                                      elevation: 5,
-                                      color: Alla24Colors.cardItemBg,
-                                      child: Column(
-                                          crossAxisAlignment:
-                                              CrossAxisAlignment.start,
-                                          children: [
-                                            IconButton(
-                                                icon: Icon(
-                                                    products[index].isFavorite
-                                                        ? Icons.favorite
-                                                        : Icons.favorite_border,
-                                                    color: products[index]
-                                                            .isFavorite
-                                                        ? Colors.red
-                                                        : Colors.black),
-                                                onPressed: () => products[index]
-                                                    .toggleFavoriteStatus()),
-                                            Expanded(
-                                                child: Row(children: [
-                                              Expanded(
-                                                  child: Image.asset(
-                                                products[index].image,
-                                                fit: BoxFit.contain,
-                                              ))
-                                            ])),
-                                          ]))),
-                              Text('حقيبة ظهر'),
-                              Row(children: [
-                                Expanded(
-                                  child: Text(
-                                    "${products[index].currentPrice.toString()} دع",
-                                    style: TextStyle(
-                                        fontSize: 14,
-                                        color: Alla24Colors.button),
-                                    // fontSize: product.isSelected ? 18 : 16,
-                                  ),
-                                ),
-                                SizedBox(width: 15),
-                                Expanded(
-                                  child: Text(
-                                    products[index].oldPrice.toString(),
-                                    style: TextStyle(
-                                        fontSize: 9,
-                                        decoration: TextDecoration.lineThrough),
-                                  ),
-                                )
-                              ]),
-                              Row(children: [
-                                Expanded(
-                                  child: SizedBox(
-                                    height: 30,
-                                    child: RaisedButton(
-                                      child: Text(
-                                        "اشتري الآن",
-                                        style: TextStyle(fontSize: 13),
-                                      ),
-                                      padding: const EdgeInsets.symmetric(
-                                          vertical: 5),
-                                      color: Alla24Colors.button,
-                                      textColor: Alla24Colors.white,
-                                      shape: RoundedRectangleBorder(
-                                          borderRadius:
-                                              BorderRadius.circular(12)),
-                                      onPressed: () {},
-                                    ),
-                                  ),
-                                ),
-                                SizedBox(width: 20),
-                                Expanded(
-                                  child: Text(
-                                    'خصم %8',
-                                    style: TextStyle(
-                                        fontSize: 12,
-                                        color: Alla24Colors.button),
-                                  ),
-                                )
-                              ]),
-                            ]),
-                      ),
-                    ))),
+                    child: ChangeNotifierProvider.value(
+                        value: products[index], child: SingleProduct()))),
           )
         ]));
   }

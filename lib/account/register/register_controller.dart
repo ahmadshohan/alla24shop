@@ -23,20 +23,17 @@ abstract class _RegisterControllerBase with Store {
 
   Future init() async {
     autoValidate = false;
-    city = 'محافظة كركوك';
-    // lang = await _preferencesService.lang;
-    // AppLocalization.langStream.listen((value) {
-    //   lang = value;
-    // });
+    city = 'كركوك';
   }
 
   @observable
   bool loading = false;
+
   @observable
   bool autoValidate = false;
 
   @observable
-  String city = 'محافظة كركوك';
+  String city = 'كركوك';
 
   @observable
   bool showPassword = false;

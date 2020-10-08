@@ -14,7 +14,6 @@ class CategoryPage extends StatefulWidget {
 
 class _CategoryPageState extends State<CategoryPage> {
   final _searchController = TextEditingController();
-
   @override
   void dispose() {
     _searchController.dispose();
@@ -98,20 +97,21 @@ class _CategoryPageState extends State<CategoryPage> {
 
   _buildFullAppBar() {
     return AppBar(
-        backgroundColor: Alla24Colors.button,
-        leading: IconButton(
-          icon: Icon(
-            EvaIcons.menu,
-            color: Alla24Colors.white,
-          ),
-          onPressed: () {},
+      backgroundColor: Alla24Colors.button,
+      leading: IconButton(
+        icon: Icon(
+          EvaIcons.menu,
+          color: Alla24Colors.white,
         ),
-        title: _buildSearchField(),
-        actions: [
-          IconButton(
-            icon: Icon(Icons.filter_list, color: Alla24Colors.white),
-            onPressed: () {},
-          )
-        ]);
+        onPressed: () {},
+      ),
+      title: _buildSearchField(),
+      actions: [
+        IconButton(
+          icon: Icon(Icons.filter_list, color: Alla24Colors.white),
+          onPressed: () {},
+        )
+      ],
+    );
   }
 }
