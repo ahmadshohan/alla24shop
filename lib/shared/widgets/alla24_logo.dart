@@ -1,0 +1,25 @@
+import 'package:flutter/material.dart';
+
+class Alla24Logo extends StatelessWidget {
+  final double height;
+
+  final EdgeInsetsGeometry margin;
+  final EdgeInsetsGeometry padding;
+
+  Alla24Logo({this.height, this.margin, this.padding});
+
+  @override
+  Widget build(BuildContext context) {
+    Widget image;
+    if (height == null)
+      image = Image.asset('assets/png/alla24logo.png');
+    else
+      image = Image.asset('assets/png/alla24logo.png', height: height);
+
+    return Container(
+      margin: margin ?? const EdgeInsets.all(0),
+      padding: padding ?? const EdgeInsets.all(0),
+      child: image,
+    );
+  }
+}
