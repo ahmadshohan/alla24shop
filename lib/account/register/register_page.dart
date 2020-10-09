@@ -205,7 +205,7 @@ class _RegisterPageState extends State<RegisterPage> {
                             ))),
                     Text('أختر محافظة',
                         style: TextStyle(color: Colors.black, fontSize: 17)),
-                    _androidCityDropDownButton(),
+                    _buildCityDropDownButton(),
                     Text('كلمة السر',
                         style: TextStyle(color: Colors.black, fontSize: 17)),
                     Observer(
@@ -309,7 +309,7 @@ class _RegisterPageState extends State<RegisterPage> {
             ]))));
   }
 
-  _androidCityDropDownButton() {
+  _buildCityDropDownButton() {
     List<DropdownMenuItem<String>> dropDownItems = [];
     for (String city in cityList) {
       var newItem = DropdownMenuItem(

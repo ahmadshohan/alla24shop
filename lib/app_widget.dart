@@ -3,6 +3,8 @@ import 'package:alla24/account/login/login_page.dart';
 import 'package:alla24/account/register/register_page.dart';
 import 'package:alla24/app_route.dart';
 import 'package:alla24/colors.dart';
+import 'package:alla24/main/settings/profile/edit_profile/edit_profile_page.dart';
+import 'package:alla24/main/settings/profile/profile_page.dart';
 import 'package:alla24/shared/localization/app_localization.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:alla24/main/main_navigator.dart';
@@ -52,10 +54,8 @@ class Alla24AppState extends State<Alla24App> {
             AppRoute.forgotPasswordRoute: (ctx) => ForgotPasswordPage(),
             AppRoute.mainRoute: (ctx) => MainNavigator(),
             AppRoute.productDetailRoute: (ctx) => ProductDetails(),
-            // AppRoute.settingsRoute: (ctx) => SettingsPage(),
-            // AppRoute.aboutUsRoute: (ctx) => AboutUsPage(),
-            // AppRoute.profileRoute: (ctx) => ProfilePage(),
-            // AppRoute.editProfileRoute: (ctx) => EditProfilePage(),
+            AppRoute.profileRoute: (ctx) => ProfilePage(),
+            AppRoute.editProfileRoute: (ctx) => EditProfilePage(),
           }),
     );
   }

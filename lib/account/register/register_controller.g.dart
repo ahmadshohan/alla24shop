@@ -39,6 +39,21 @@ mixin _$RegisterController on _RegisterControllerBase, Store {
     });
   }
 
+  final _$langAtom = Atom(name: '_RegisterControllerBase.lang');
+
+  @override
+  String get lang {
+    _$langAtom.reportRead();
+    return super.lang;
+  }
+
+  @override
+  set lang(String value) {
+    _$langAtom.reportWrite(value, super.lang, () {
+      super.lang = value;
+    });
+  }
+
   final _$cityAtom = Atom(name: '_RegisterControllerBase.city');
 
   @override
@@ -93,6 +108,17 @@ mixin _$RegisterController on _RegisterControllerBase, Store {
 
   final _$_RegisterControllerBaseActionController =
       ActionController(name: '_RegisterControllerBase');
+
+  @override
+  bool isRtl() {
+    final _$actionInfo = _$_RegisterControllerBaseActionController.startAction(
+        name: '_RegisterControllerBase.isRtl');
+    try {
+      return super.isRtl();
+    } finally {
+      _$_RegisterControllerBaseActionController.endAction(_$actionInfo);
+    }
+  }
 
   @override
   void selectedCity(String selectedCity) {
@@ -176,6 +202,7 @@ mixin _$RegisterController on _RegisterControllerBase, Store {
     return '''
 loading: ${loading},
 autoValidate: ${autoValidate},
+lang: ${lang},
 city: ${city},
 showPassword: ${showPassword},
 model: ${model}

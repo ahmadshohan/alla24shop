@@ -117,6 +117,21 @@ mixin _$ForgotPasswordController on _ForgotPasswordControllerBase, Store {
     });
   }
 
+  final _$langAtom = Atom(name: '_ForgotPasswordControllerBase.lang');
+
+  @override
+  String get lang {
+    _$langAtom.reportRead();
+    return super.lang;
+  }
+
+  @override
+  set lang(String value) {
+    _$langAtom.reportWrite(value, super.lang, () {
+      super.lang = value;
+    });
+  }
+
   final _$forgotPasswordAsyncAction =
       AsyncAction('_ForgotPasswordControllerBase.forgotPassword');
 
@@ -127,6 +142,17 @@ mixin _$ForgotPasswordController on _ForgotPasswordControllerBase, Store {
 
   final _$_ForgotPasswordControllerBaseActionController =
       ActionController(name: '_ForgotPasswordControllerBase');
+
+  @override
+  bool isRtl() {
+    final _$actionInfo = _$_ForgotPasswordControllerBaseActionController
+        .startAction(name: '_ForgotPasswordControllerBase.isRtl');
+    try {
+      return super.isRtl();
+    } finally {
+      _$_ForgotPasswordControllerBaseActionController.endAction(_$actionInfo);
+    }
+  }
 
   @override
   void changeRememberMe() {
@@ -181,7 +207,8 @@ showTimer: ${showTimer},
 model: ${model},
 timer: ${timer},
 rememberMe: ${rememberMe},
-showPassword: ${showPassword}
+showPassword: ${showPassword},
+lang: ${lang}
     ''';
   }
 }

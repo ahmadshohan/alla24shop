@@ -69,6 +69,21 @@ mixin _$LoginController on _LoginControllerBase, Store {
     });
   }
 
+  final _$langAtom = Atom(name: '_LoginControllerBase.lang');
+
+  @override
+  String get lang {
+    _$langAtom.reportRead();
+    return super.lang;
+  }
+
+  @override
+  set lang(String value) {
+    _$langAtom.reportWrite(value, super.lang, () {
+      super.lang = value;
+    });
+  }
+
   final _$modelAtom = Atom(name: '_LoginControllerBase.model');
 
   @override
@@ -93,6 +108,17 @@ mixin _$LoginController on _LoginControllerBase, Store {
 
   final _$_LoginControllerBaseActionController =
       ActionController(name: '_LoginControllerBase');
+
+  @override
+  bool isRtl() {
+    final _$actionInfo = _$_LoginControllerBaseActionController.startAction(
+        name: '_LoginControllerBase.isRtl');
+    try {
+      return super.isRtl();
+    } finally {
+      _$_LoginControllerBaseActionController.endAction(_$actionInfo);
+    }
+  }
 
   @override
   void changeRememberMe() {
@@ -145,6 +171,7 @@ rememberMe: ${rememberMe},
 showPassword: ${showPassword},
 loading: ${loading},
 autoValidate: ${autoValidate},
+lang: ${lang},
 model: ${model}
     ''';
   }
