@@ -29,10 +29,10 @@ abstract class _ForgotPasswordControllerBase with Store {
 
   Future init() async {
     autoValidate = false;
-    // lang = await _preferencesService.lang;
-    // AppLocalization.langStream.listen((value) {
-    //   lang = value;
-    // });
+    lang = await _preferencesService.lang;
+    AppLocalization.langStream.listen((value) {
+      lang = value;
+    });
   }
 
   @observable
@@ -56,11 +56,11 @@ abstract class _ForgotPasswordControllerBase with Store {
   @observable
   bool showPassword = false;
 
-  // @observable
-  // String lang = AppLocalization.defaultLang;
-  //
-  // @action
-  // bool isRtl() => lang == AppLocalization.ar;
+  @observable
+  String lang = AppLocalization.defaultLang;
+
+  @action
+  bool isRtl() => lang == AppLocalization.ar;
 
   @action
   void changeRememberMe() {
@@ -75,11 +75,11 @@ abstract class _ForgotPasswordControllerBase with Store {
   @action
   String checkEmail() {
     if (model.email.isEmpty)
-      return "AppLocalization.emailRequired";
+      return AppLocalization.emailRequired;
     else if (EmailValidator.validate(model.email))
       return null;
     else
-      return "AppLocalization.emailNotValid";
+      return AppLocalization.emailNotValid;
   }
 
   @action

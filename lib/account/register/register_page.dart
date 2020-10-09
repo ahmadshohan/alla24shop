@@ -1,5 +1,3 @@
-import 'dart:ffi';
-
 import 'package:alla24/account/register/register_controller.dart';
 import 'package:alla24/app_route.dart';
 import 'package:alla24/colors.dart';
@@ -61,7 +59,6 @@ class _RegisterPageState extends State<RegisterPage> {
                       child: SingleChildScrollView(
                           child: Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
-                              textDirection: TextDirection.rtl,
                               children: [
                             _buildTitleAndLogo(),
                             Padding(
@@ -71,7 +68,6 @@ class _RegisterPageState extends State<RegisterPage> {
                                     mainAxisAlignment: MainAxisAlignment.center,
                                     crossAxisAlignment:
                                         CrossAxisAlignment.start,
-                                    textDirection: TextDirection.rtl,
                                     children: <Widget>[
                                       SizedBox(height: 10),
                                       Form(
@@ -129,34 +125,29 @@ class _RegisterPageState extends State<RegisterPage> {
     return Column(
         mainAxisSize: MainAxisSize.min,
         crossAxisAlignment: CrossAxisAlignment.start,
-        textDirection: TextDirection.rtl,
         children: <Widget>[
           Padding(
               padding: const EdgeInsets.symmetric(horizontal: 30),
               child: Column(
                   mainAxisSize: MainAxisSize.min,
                   crossAxisAlignment: CrossAxisAlignment.start,
-                  textDirection: TextDirection.rtl,
                   children: <Widget>[
                     Text('الاسم',
                         style: TextStyle(color: Colors.black, fontSize: 17)),
                     TextFormField(
                         style: TextStyle(color: Alla24Colors.black),
                         focusNode: _nameFN,
-                        textAlign: TextAlign.end,
                         onChanged: (value) =>
                             _registerController.model.fullName = value,
                         validator: (_) => _registerController.checkFullName(),
                         onFieldSubmitted: (_) => FocusScope.of(context)
                             .requestFocus(_telefonNumberFN),
                         decoration: InputDecoration(
-                            prefixIcon:
+                            suffixIcon:
                                 Icon(EvaIcons.person, color: Colors.grey),
                             fillColor: Alla24Colors.white,
                             filled: true,
-                            labelStyle: TextStyle(
-                              color: Alla24Colors.black,
-                            ),
+                            labelStyle: TextStyle(color: Alla24Colors.black),
                             contentPadding:
                                 EdgeInsets.symmetric(horizontal: 10),
                             border: OutlineInputBorder(
@@ -167,7 +158,6 @@ class _RegisterPageState extends State<RegisterPage> {
                     TextFormField(
                         keyboardType: TextInputType.emailAddress,
                         textInputAction: TextInputAction.next,
-                        textAlign: TextAlign.end,
                         onChanged: (value) =>
                             _registerController.model.email = value,
                         validator: (_) => _registerController.checkEmail(),
@@ -178,7 +168,7 @@ class _RegisterPageState extends State<RegisterPage> {
                         decoration: InputDecoration(
                             fillColor: Colors.white10,
                             filled: true,
-                            prefixIcon:
+                            suffixIcon:
                                 Icon(EvaIcons.email, color: Colors.grey),
                             labelStyle: TextStyle(color: Alla24Colors.black),
                             contentPadding:
@@ -191,7 +181,6 @@ class _RegisterPageState extends State<RegisterPage> {
                     TextFormField(
                         keyboardType: TextInputType.numberWithOptions(),
                         textInputAction: TextInputAction.next,
-                        textAlign: TextAlign.end,
                         focusNode: _telefonNumberFN,
                         onChanged: (value) =>
                             _registerController.model.phoneNumber = value,
@@ -204,6 +193,8 @@ class _RegisterPageState extends State<RegisterPage> {
                         ],
                         style: TextStyle(color: Colors.white),
                         decoration: InputDecoration(
+                            suffixIcon:
+                                Icon(EvaIcons.phone, color: Colors.grey),
                             fillColor: Colors.white10,
                             filled: true,
                             labelStyle: TextStyle(color: Alla24Colors.black),
@@ -215,46 +206,40 @@ class _RegisterPageState extends State<RegisterPage> {
                     Text('أختر محافظة',
                         style: TextStyle(color: Colors.black, fontSize: 17)),
                     _androidCityDropDownButton(),
-                    /*todo dropbox citiys*/
                     Text('كلمة السر',
                         style: TextStyle(color: Colors.black, fontSize: 17)),
                     Observer(
-                      builder: (_) => TextFormField(
-                          textAlign: TextAlign.end,
-                          style: TextStyle(color: Colors.white),
-                          textInputAction: TextInputAction.next,
-                          focusNode: _passwordFN,
-                          onFieldSubmitted: (_) => FocusScope.of(context)
-                              .requestFocus(_passwordConfirmFN),
-                          onChanged: (value) =>
-                              _registerController.model.password = value,
-                          validator: (_) => _registerController.checkPassword(),
-                          obscureText: !_registerController.showPassword,
-                          decoration: InputDecoration(
-                              fillColor: Colors.white10,
-                              filled: true,
-                              labelStyle: TextStyle(
-                                color: Alla24Colors.black,
-                              ),
-                              contentPadding:
-                                  EdgeInsets.symmetric(horizontal: 10),
-                              prefixIcon: GestureDetector(
-                                onTap: () =>
-                                    _registerController.changeViewPassword(),
-                                child: Icon(_registerController.showPassword
-                                    ? EvaIcons.eye
-                                    : EvaIcons.eyeOff),
-                              ),
-                              border: OutlineInputBorder(
-                                borderRadius: BorderRadius.circular(10),
-                              ))),
-                    ),
+                        builder: (_) => TextFormField(
+                            style: TextStyle(color: Colors.white),
+                            textInputAction: TextInputAction.next,
+                            focusNode: _passwordFN,
+                            onFieldSubmitted: (_) => FocusScope.of(context)
+                                .requestFocus(_passwordConfirmFN),
+                            onChanged: (value) =>
+                                _registerController.model.password = value,
+                            validator: (_) =>
+                                _registerController.checkPassword(),
+                            obscureText: !_registerController.showPassword,
+                            decoration: InputDecoration(
+                                fillColor: Colors.white10,
+                                filled: true,
+                                labelStyle: TextStyle(
+                                  color: Alla24Colors.black,
+                                ),
+                                contentPadding:
+                                    EdgeInsets.symmetric(horizontal: 10),
+                                suffixIcon: GestureDetector(
+                                    onTap: () => _registerController
+                                        .changeViewPassword(),
+                                    child: Icon(_registerController.showPassword
+                                        ? EvaIcons.eye
+                                        : EvaIcons.eyeOff)),
+                                border: OutlineInputBorder(
+                                    borderRadius: BorderRadius.circular(10))))),
                     Text('تأكيد كلمة السر',
-                        textAlign: TextAlign.end,
                         style: TextStyle(color: Colors.black, fontSize: 17)),
                     Observer(
                       builder: (_) => TextFormField(
-                          textAlign: TextAlign.end,
                           style: TextStyle(color: Colors.white),
                           textInputAction: TextInputAction.next,
                           focusNode: _passwordConfirmFN,
@@ -269,7 +254,7 @@ class _RegisterPageState extends State<RegisterPage> {
                               labelStyle: TextStyle(color: Alla24Colors.black),
                               contentPadding:
                                   EdgeInsets.symmetric(horizontal: 10),
-                              prefixIcon: GestureDetector(
+                              suffixIcon: GestureDetector(
                                 onTap: () =>
                                     _registerController.changeViewPassword(),
                                 child: Icon(_registerController.showPassword
@@ -331,15 +316,13 @@ class _RegisterPageState extends State<RegisterPage> {
           child: Text(city, overflow: TextOverflow.ellipsis), value: city);
       dropDownItems.add(newItem);
     }
-    return Directionality(
-        textDirection: TextDirection.rtl,
-        child: DropdownButton<String>(
-            isExpanded: true,
-            elevation: 7,
-            onChanged: (selectedCity) {
-              _registerController.selectedCity(selectedCity);
-            },
-            value: _registerController.city,
-            items: dropDownItems));
+    return DropdownButton<String>(
+        isExpanded: true,
+        elevation: 7,
+        onChanged: (selectedCity) {
+          _registerController.selectedCity(selectedCity);
+        },
+        value: _registerController.city,
+        items: dropDownItems);
   }
 }

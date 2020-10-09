@@ -42,7 +42,7 @@ class _ForgotPasswordPageState extends State<ForgotPasswordPage> {
                     child: Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 20),
                   child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.end,
+                    crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       _buildTitleAndLogo(),
                       SizedBox(height: 50),
@@ -107,7 +107,6 @@ class _ForgotPasswordPageState extends State<ForgotPasswordPage> {
   _buildTitles() {
     return [
       Text("نسيت كلمة السر ؟",
-          textAlign: TextAlign.right,
           textDirection: TextDirection.rtl,
           style: Theme.of(context)
               .textTheme
@@ -118,7 +117,6 @@ class _ForgotPasswordPageState extends State<ForgotPasswordPage> {
 
   _buildInputs() {
     return TextFormField(
-        textAlign: TextAlign.end,
         keyboardType: TextInputType.emailAddress,
         textInputAction: TextInputAction.next,
         onChanged: (value) => _forgotPasswordController.model.email = value,
@@ -129,7 +127,7 @@ class _ForgotPasswordPageState extends State<ForgotPasswordPage> {
         style: TextStyle(color: Alla24Colors.black),
         decoration: InputDecoration(
             labelText: "الأيميل",
-            prefixIcon: Icon(EvaIcons.email, color: Colors.grey),
+            suffixIcon: Icon(EvaIcons.email, color: Colors.grey),
             fillColor: Colors.white10,
             filled: true,
             labelStyle: TextStyle(
@@ -159,6 +157,12 @@ class _ForgotPasswordPageState extends State<ForgotPasswordPage> {
 
   _buildResend() {
     return Row(mainAxisAlignment: MainAxisAlignment.center, children: <Widget>[
+      Text("لم يصلك ايميل ؟",
+          style: Theme.of(context)
+              .textTheme
+              .bodyText1
+              .copyWith(color: Alla24Colors.black, fontSize: 19)),
+      SizedBox(width: 3),
       GestureDetector(
         onTap: () async {
           KeyBoard.close(context);
@@ -174,12 +178,6 @@ class _ForgotPasswordPageState extends State<ForgotPasswordPage> {
                 fontSize: 19,
                 decoration: TextDecoration.underline)),
       ),
-      SizedBox(width: 10),
-      Text("لم يصلك ايميل ؟",
-          style: Theme.of(context)
-              .textTheme
-              .bodyText1
-              .copyWith(color: Alla24Colors.black, fontSize: 19)),
     ]);
   }
 }

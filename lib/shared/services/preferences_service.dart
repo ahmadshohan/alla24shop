@@ -6,7 +6,7 @@ class PreferencesService {
   final _token = 'token';
   final _user = 'user';
 
-  // get lang async => (await _get(_lang)) ?? AppLocalization.tr;
+  get lang async => (await _get(_lang)) ?? AppLocalization.ar;
 
   set lang(String value) => _put(_lang, value);
 

@@ -48,8 +48,7 @@ class _LoginPageState extends State<LoginPage> {
                     right: false,
                     child: SingleChildScrollView(
                         child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.end,
-                            textDirection: TextDirection.rtl,
+                            crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                           _buildTitleAndLogo(),
                           SizedBox(height: 10),
@@ -58,8 +57,7 @@ class _LoginPageState extends State<LoginPage> {
                                   const EdgeInsets.symmetric(horizontal: 30),
                               child: Column(
                                 mainAxisAlignment: MainAxisAlignment.center,
-                                crossAxisAlignment: CrossAxisAlignment.end,
-                                textDirection: TextDirection.rtl,
+                                crossAxisAlignment: CrossAxisAlignment.start,
                                 children: <Widget>[
                                   SizedBox(height: 10),
                                   Form(
@@ -69,7 +67,6 @@ class _LoginPageState extends State<LoginPage> {
                                       child: Column(
                                         crossAxisAlignment:
                                             CrossAxisAlignment.start,
-                                        textDirection: TextDirection.rtl,
                                         children: <Widget>[
                                           ..._buildInputs(),
                                         ],
@@ -100,15 +97,10 @@ class _LoginPageState extends State<LoginPage> {
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: <Widget>[
                   Shimmer.fromColors(
-                    baseColor: Alla24Colors.white,
-                    highlightColor: Alla24Colors.button,
-                    enabled: true,
-                    child: Image.asset(
-                      _logo,
-                      height: 80,
-                      width: 80,
-                    ),
-                  ),
+                      baseColor: Alla24Colors.white,
+                      highlightColor: Alla24Colors.button,
+                      enabled: true,
+                      child: Image.asset(_logo, height: 80, width: 80)),
                   Shimmer.fromColors(
                       baseColor: Alla24Colors.white,
                       highlightColor: Colors.grey,
@@ -129,7 +121,6 @@ class _LoginPageState extends State<LoginPage> {
       Text('الأيميل', style: TextStyle(color: Colors.black, fontSize: 17)),
       TextFormField(
           textDirection: TextDirection.rtl,
-          textAlign: TextAlign.right,
           keyboardType: TextInputType.emailAddress,
           onChanged: (value) => _loginController.model.email = value,
           validator: (_) => _loginController.checkEmail(),
@@ -140,7 +131,7 @@ class _LoginPageState extends State<LoginPage> {
             FocusScope.of(context).requestFocus(_passwordFocusNode);
           },
           decoration: InputDecoration(
-              prefixIcon: Icon(EvaIcons.email),
+              suffixIcon: Icon(EvaIcons.email),
               fillColor: Colors.white10,
               filled: true,
               labelStyle: TextStyle(color: Alla24Colors.black),
@@ -149,14 +140,10 @@ class _LoginPageState extends State<LoginPage> {
                 borderRadius: new BorderRadius.circular(10),
               ))),
       SizedBox(height: 10),
-      Text(
-        'كلمة السر',
-        style: TextStyle(color: Colors.black, fontSize: 17),
-      ),
+      Text('كلمة السر', style: TextStyle(color: Colors.black, fontSize: 17)),
       Observer(
         builder: (_) => TextFormField(
             textDirection: TextDirection.rtl,
-            textAlign: TextAlign.right,
             style: TextStyle(color: Alla24Colors.black),
             obscureText: !_loginController.showPassword,
             focusNode: _passwordFocusNode,
@@ -167,15 +154,13 @@ class _LoginPageState extends State<LoginPage> {
                 filled: true,
                 labelStyle: TextStyle(color: Alla24Colors.black),
                 contentPadding: EdgeInsets.all(16),
-                prefixIcon: GestureDetector(
-                  onTap: () => _loginController.changeViewPassword(),
-                  child: Icon(
-                    _loginController.showPassword
-                        ? EvaIcons.eye
-                        : EvaIcons.eyeOff,
-                    color: Alla24Colors.black,
-                  ),
-                ),
+                suffixIcon: GestureDetector(
+                    onTap: () => _loginController.changeViewPassword(),
+                    child: Icon(
+                        _loginController.showPassword
+                            ? EvaIcons.eye
+                            : EvaIcons.eyeOff,
+                        color: Alla24Colors.black)),
                 border: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(10),
                 ))),
@@ -185,6 +170,27 @@ class _LoginPageState extends State<LoginPage> {
 
   _buildActions() {
     return Row(children: [
+      Row(children: [
+        Theme(
+          data: ThemeData(unselectedWidgetColor: Colors.orange),
+          child: Observer(
+            builder: (_) => Checkbox(
+              activeColor: Colors.orange,
+              checkColor: Alla24Colors.white,
+              value: _loginController.rememberMe,
+              onChanged: (value) => _loginController.changeRememberMe(),
+            ),
+          ),
+        ),
+        GestureDetector(
+            onTap: () => _loginController.changeRememberMe(),
+            child: Text("تذكر كلمة السر",
+                style: Theme.of(context)
+                    .textTheme
+                    .bodyText1
+                    .copyWith(color: Alla24Colors.black, fontSize: 12))),
+      ]),
+      Spacer(),
       GestureDetector(
         onTap: () {
           Navigator.pushNamed(context, AppRoute.forgotPasswordRoute);
@@ -198,30 +204,6 @@ class _LoginPageState extends State<LoginPage> {
               ),
         ),
       ),
-      Spacer(),
-      Row(children: [
-        GestureDetector(
-          onTap: () => _loginController.changeRememberMe(),
-          child: Text(
-            "تذكر كلمة السر",
-            style: Theme.of(context)
-                .textTheme
-                .bodyText1
-                .copyWith(color: Alla24Colors.black, fontSize: 12),
-          ),
-        ),
-        Theme(
-          data: ThemeData(unselectedWidgetColor: Colors.orange),
-          child: Observer(
-            builder: (_) => Checkbox(
-              activeColor: Colors.orange,
-              checkColor: Alla24Colors.white,
-              value: _loginController.rememberMe,
-              onChanged: (value) => _loginController.changeRememberMe(),
-            ),
-          ),
-        ),
-      ]),
     ]);
   }
 

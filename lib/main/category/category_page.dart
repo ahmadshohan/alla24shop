@@ -97,21 +97,20 @@ class _CategoryPageState extends State<CategoryPage> {
 
   _buildFullAppBar() {
     return AppBar(
-      backgroundColor: Alla24Colors.button,
-      leading: IconButton(
-        icon: Icon(
-          EvaIcons.menu,
-          color: Alla24Colors.white,
-        ),
-        onPressed: () {},
-      ),
-      title: _buildSearchField(),
-      actions: [
-        IconButton(
-          icon: Icon(Icons.filter_list, color: Alla24Colors.white),
+        backgroundColor: Alla24Colors.button,
+        leading: IconButton(
+          icon: Icon(
+            EvaIcons.menu,
+            color: Alla24Colors.white,
+          ),
           onPressed: () {},
-        )
-      ],
-    );
+        ),
+        title: _buildSearchField(),
+        actions: [
+          IconButton(
+            icon: Icon(Icons.filter_list, color: Alla24Colors.white),
+            onPressed: () {},
+          )
+        ]);
   }
 }

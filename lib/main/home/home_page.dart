@@ -56,27 +56,24 @@ class _HomePageState extends State<HomePage>
                     height: double.infinity,
                     padding: EdgeInsets.all(10),
                     child: SingleChildScrollView(
-                        child: Directionality(
-                            textDirection: TextDirection.rtl,
-                            child: Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: <Widget>[
-                                  Column(
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.start,
-                                      children: <Widget>[
-                                        _buildSliderCarousel(),
-                                        SizedBox(height: 12),
-                                        _buildCategoryHorizentalList(),
-                                        _buildLastProductList(products),
-                                        SizedBox(height: 12),
-                                        _buildTodayProductList(products),
-                                        SizedBox(height: 12),
-                                        _buildNewProductList(products),
-                                        SizedBox(height: 12),
-                                        _buildNewProductList(products),
-                                      ])
-                                ])))),
+                        child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: <Widget>[
+                          Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: <Widget>[
+                                _buildSliderCarousel(),
+                                SizedBox(height: 12),
+                                _buildCategoryHorizentalList(),
+                                _buildLastProductList(products),
+                                SizedBox(height: 12),
+                                _buildTodayProductList(products),
+                                SizedBox(height: 12),
+                                _buildNewProductList(products),
+                                SizedBox(height: 12),
+                                _buildNewProductList(products),
+                              ])
+                        ]))),
                 Visibility(
                     visible: _controller.loading,
                     child: Center(child: Loader()))
@@ -96,10 +93,7 @@ class _HomePageState extends State<HomePage>
                   borderRadius: BorderRadius.circular(10),
                 ),
                 child: TextField(
-                    style: TextStyle(
-                      fontSize: 15.0,
-                      color: Colors.black,
-                    ),
+                    style: TextStyle(fontSize: 15.0, color: Colors.black),
                     controller: _searchController,
                     onChanged: (value) {},
                     onSubmitted: (value) {

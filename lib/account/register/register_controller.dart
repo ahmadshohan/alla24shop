@@ -1,16 +1,15 @@
 import 'dart:convert';
-import 'dart:io';
 
 import 'package:alla24/account/data/account_repository.dart';
 import 'package:alla24/account/data/models/login.dart';
 import 'package:alla24/account/data/models/register.dart';
 import 'package:alla24/app_route.dart';
 import 'package:alla24/data/models/result.dart';
+import 'package:alla24/shared/localization/app_localization.dart';
 import 'package:alla24/shared/services/preferences_service.dart';
 import 'package:alla24/shared/widgets/toaster.dart';
 import 'package:email_validator/email_validator.dart';
 import 'package:flutter/cupertino.dart';
-import 'package:intl/intl.dart';
 import 'package:mobx/mobx.dart';
 
 part 'register_controller.g.dart';
@@ -22,8 +21,12 @@ abstract class _RegisterControllerBase with Store {
   AccountRepository _accountRepository = AccountRepository();
 
   Future init() async {
+    lang = await _preferencesService.lang;
     autoValidate = false;
     city = 'كركوك';
+    AppLocalization.langStream.listen((value) {
+      lang = value;
+    });
   }
 
   @observable
@@ -31,6 +34,9 @@ abstract class _RegisterControllerBase with Store {
 
   @observable
   bool autoValidate = false;
+
+  @observable
+  String lang = AppLocalization.defaultLang;
 
   @observable
   String city = 'كركوك';
@@ -41,8 +47,8 @@ abstract class _RegisterControllerBase with Store {
   @observable
   RegisterModel model = RegisterModel();
 
-  // @action
-  // bool isRtl() => lang == AppLocalization.ar;
+  @action
+  bool isRtl() => lang == AppLocalization.ar;
 
   @action
   void selectedCity(String selectedCity) {
@@ -56,9 +62,9 @@ abstract class _RegisterControllerBase with Store {
 
   @action
   String checkFullName() {
-    if (model.fullName.isEmpty) return "AppLocalization.userNameRequired";
+    if (model.fullName.isEmpty) return AppLocalization.userNameRequired;
     if (model.fullName.length < 4)
-      return "AppLocalization.userNameNotValid";
+      return AppLocalization.userNameNotValid;
     else
       return null;
   }
@@ -66,25 +72,25 @@ abstract class _RegisterControllerBase with Store {
   @action
   String checkEmail() {
     if (model.email.isEmpty)
-      return "AppLocalization.emailRequired";
+      return AppLocalization.emailRequired;
     else if (EmailValidator.validate(model.email))
       return null;
     else
-      return "AppLocalization.emailNotValid";
+      return AppLocalization.emailNotValid;
   }
 
   @action
   String checkPassword() {
-    if (model.password.isEmpty) return "AppLocalization.passwordRequired";
+    if (model.password.isEmpty) return AppLocalization.passwordRequired;
     if (model.password.length < 6 || model.password.length > 30)
-      return "AppLocalization.passwordNotValid";
+      return AppLocalization.passwordNotValid;
     else
       return null;
   }
 
   @action
   String checkMatchPassword() {
-    if (model.password.isEmpty) return "AppLocalization.passwordRequired";
+    if (model.password.isEmpty) return AppLocalization.passwordRequired;
     if (model.password != model.passwordConfirm)
       return "AppLocalization.passwordNotMatch";
     else
@@ -93,9 +99,9 @@ abstract class _RegisterControllerBase with Store {
 
   @action
   String checkPhoneNumber() {
-    if (model.phoneNumber.isEmpty) return "AppLocalization.phoneNumberRequired";
+    if (model.phoneNumber.isEmpty) return AppLocalization.phoneNumberRequired;
     if (model.phoneNumber.length < 11)
-      return "AppLocalization.phoneNumberNotValid";
+      return AppLocalization.phoneNumberNotValid;
     else
       return null;
   }

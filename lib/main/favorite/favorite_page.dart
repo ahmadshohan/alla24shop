@@ -1,8 +1,9 @@
+import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:alla24/colors.dart';
 import 'package:alla24/provider/products.dart';
 import 'package:alla24/shared/widgets/products_grid.dart';
-import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
 
 class FavoritePage extends StatefulWidget {
   @override
@@ -17,7 +18,10 @@ class _FavoritePageState extends State<FavoritePage> {
       appBar: AppBar(
           elevation: 0.1,
           backgroundColor: Alla24Colors.button,
-          title: Text('المفضلة')),
+          title: Center(
+            child: Text('المفضلة',
+                overflow: TextOverflow.ellipsis, textAlign: TextAlign.center),
+          )),
       body: Container(
           height: double.infinity,
           padding: EdgeInsets.all(10),
