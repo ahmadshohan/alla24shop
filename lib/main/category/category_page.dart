@@ -1,10 +1,13 @@
 import 'package:alla24/colors.dart';
+import 'package:alla24/main/category/category_controller.dart';
 import 'package:alla24/provider/products.dart';
 import 'package:alla24/shared/widgets/closable.dart';
 import 'package:alla24/shared/widgets/products_grid.dart';
+import 'package:alla24/shared/widgets/products_list.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:eva_icons_flutter/eva_icons_flutter.dart';
+import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:provider/provider.dart';
 
 class CategoryPage extends StatefulWidget {
@@ -13,6 +16,7 @@ class CategoryPage extends StatefulWidget {
 }
 
 class _CategoryPageState extends State<CategoryPage> {
+  CategoryController _controller = CategoryController();
   final _searchController = TextEditingController();
   @override
   void dispose() {
@@ -26,36 +30,43 @@ class _CategoryPageState extends State<CategoryPage> {
     final products = productsData.productsList;
     return Scaffold(
       appBar: _buildFullAppBar(),
-      body: Container(
-          height: double.infinity,
-          child: Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 5),
-            child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: <Widget>[
-                  Row(children: [
-                    Text("احدث العروض",
-                        style: TextStyle(
-                            color: Alla24Colors.button, fontSize: 19)),
-                    Spacer(),
-                    IconButton(
-                      icon: Icon(
-                        Icons.apps,
-                        color: Alla24Colors.button,
+      body: Observer(
+        builder: (_) => Container(
+            height: double.infinity,
+            child: Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 5),
+              child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: <Widget>[
+                    Row(children: [
+                      Text("احدث العروض",
+                          style: TextStyle(
+                              color: Alla24Colors.button, fontSize: 19)),
+                      Spacer(),
+                      IconButton(
+                        icon: Icon(Icons.apps,
+                            color: _controller.showList
+                                ? Colors.grey
+                                : Alla24Colors.button),
+                        onPressed: () => _controller.changeView(),
                       ),
-                      onPressed: () {},
-                    ),
-                    IconButton(
-                      icon: Icon(
-                        Icons.filter_list,
-                        color: Alla24Colors.button,
-                      ),
-                      onPressed: () {},
-                    ),
+                      IconButton(
+                        icon: Icon(
+                          Icons.filter_list,
+                          color: _controller.showList
+                              ? Alla24Colors.button
+                              : Colors.grey,
+                        ),
+                        onPressed: () => _controller.changeView(),
+                      )
+                    ]),
+                    Expanded(
+                        child: _controller.showList
+                            ? ProductsList(products)
+                            : ProductsGrid(products))
                   ]),
-                  Expanded(child: ProductsGrid(products))
-                ]),
-          )),
+            )),
+      ),
     );
   }
 

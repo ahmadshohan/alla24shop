@@ -1,10 +1,11 @@
 import 'package:alla24/app_route.dart';
 import 'package:alla24/colors.dart';
 import 'package:alla24/provider/products.dart';
+import 'package:eva_icons_flutter/eva_icons_flutter.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-class SingleProduct extends StatelessWidget {
+class SingleProductVertical extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final singleProduct = Provider.of<Product>(context);
@@ -27,16 +28,45 @@ class SingleProduct extends StatelessWidget {
                                       crossAxisAlignment:
                                           CrossAxisAlignment.start,
                                       children: [
-                                        IconButton(
-                                            icon: Icon(
-                                                singleProduct.isFavorite
-                                                    ? Icons.favorite
-                                                    : Icons.favorite_border,
-                                                color: singleProduct.isFavorite
-                                                    ? Colors.red
-                                                    : Colors.black),
-                                            onPressed: () => singleProduct
-                                                .toggleFavoriteStatus()),
+                                        Row(
+                                            crossAxisAlignment:
+                                                CrossAxisAlignment.start,
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.spaceBetween,
+                                            children: [
+                                              Expanded(
+                                                child: IconButton(
+                                                    icon: Icon(
+                                                        singleProduct.isFavorite
+                                                            ? Icons.favorite
+                                                            : Icons
+                                                                .favorite_border,
+                                                        color: singleProduct
+                                                                .isFavorite
+                                                            ? Colors.red
+                                                            : Colors.black),
+                                                    onPressed: () => singleProduct
+                                                        .toggleFavoriteStatus()),
+                                              ),
+                                              Expanded(
+                                                  child: Row(children: [
+                                                Icon(EvaIcons.star,
+                                                    size: 13,
+                                                    color: Colors.amber),
+                                                Icon(EvaIcons.star,
+                                                    size: 13,
+                                                    color: Colors.amber),
+                                                Icon(EvaIcons.star,
+                                                    size: 13,
+                                                    color: Colors.amber),
+                                                Icon(EvaIcons.star,
+                                                    size: 13,
+                                                    color: Colors.amber),
+                                                Icon(EvaIcons.star,
+                                                    size: 13,
+                                                    color: Colors.amber)
+                                              ]))
+                                            ]),
                                         Expanded(
                                             child: Row(children: [
                                           Expanded(
@@ -44,7 +74,7 @@ class SingleProduct extends StatelessWidget {
                                             singleProduct.image,
                                             fit: BoxFit.contain,
                                           ))
-                                        ])),
+                                        ]))
                                       ]))),
                           Text('حقيبة ظهر'),
                           Row(children: [
@@ -58,12 +88,12 @@ class SingleProduct extends StatelessWidget {
                             SizedBox(width: 10),
                             Expanded(
                                 child: Text(
-                              " ${singleProduct.oldPrice.toString()}دع",
-                              overflow: TextOverflow.ellipsis,
-                              style: TextStyle(
-                                  fontSize: 9,
-                                  decoration: TextDecoration.lineThrough),
-                            ))
+                                    " ${singleProduct.oldPrice.toString()}دع",
+                                    overflow: TextOverflow.ellipsis,
+                                    style: TextStyle(
+                                        fontSize: 9,
+                                        decoration:
+                                            TextDecoration.lineThrough)))
                           ]),
                           Row(children: [
                             Expanded(

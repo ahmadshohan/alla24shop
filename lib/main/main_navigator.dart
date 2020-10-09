@@ -1,8 +1,8 @@
 import 'package:alla24/colors.dart';
-import 'package:alla24/main/cart/cart_page.dart';
 import 'package:alla24/main/category/category_page.dart';
 import 'package:alla24/main/favorite/favorite_page.dart';
 import 'package:alla24/main/settings/settings_page.dart';
+import 'package:alla24/main/shopping_cart/shopping_cart_page.dart';
 import 'package:animations/animations.dart';
 import 'package:eva_icons_flutter/eva_icons_flutter.dart';
 import 'package:flutter/cupertino.dart';
@@ -46,7 +46,7 @@ class _MainNavigatorState extends State<MainNavigator> {
   List<Widget> allPages = [
     HomePage(),
     CategoryPage(),
-    CartPage(),
+    ShoppingCartPage(),
     FavoritePage(),
     SettingsPage(),
   ];

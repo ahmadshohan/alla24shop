@@ -7,7 +7,7 @@ import 'package:alla24/product/product_detail/product_detail_controller.dart';
 import 'package:alla24/shared/constant/data_list.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:alla24/colors.dart';
-import 'package:alla24/shared/widgets/single_product.dart';
+import 'package:alla24/shared/widgets/single_product_vertical.dart';
 import 'package:eva_icons_flutter/eva_icons_flutter.dart';
 import 'package:alla24/provider/products.dart';
 
@@ -65,8 +65,9 @@ class _ProductDetailsState extends State<ProductDetails> {
                     SliverList(
                         delegate: SliverChildListDelegate([
                       _huaweiTextAvatar(),
-                      _androidSizeDropDownButton(),
-                      _androidQuantityDropDownButton(),
+                      _buildSingleProductWithoutPicture(loadedProduct),
+                      _buildSizeDropDownButton(),
+                      _buildQuantityDropDownButton(),
                       _moreProductRelated(productsFilterd)
                     ]))
                   ]),
@@ -160,14 +161,79 @@ class _ProductDetailsState extends State<ProductDetails> {
         ]));
   }
 
+  _buildSingleProductWithoutPicture(Product loadedProduct) {
+    return Card(
+        shape: OutlineInputBorder(
+            borderRadius: BorderRadius.all(Radius.circular(10)),
+            borderSide: BorderSide.none),
+        child: Column(children: [
+          Row(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              mainAxisAlignment: MainAxisAlignment.start,
+              children: <Widget>[
+                Expanded(
+                    flex: 2,
+                    child: Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 10),
+                        child: Column(
+                            mainAxisSize: MainAxisSize.min,
+                            mainAxisAlignment: MainAxisAlignment.start,
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: <Widget>[
+                              Row(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
+                                  children: [
+                                    Text('حقيبة ظهر',
+                                        textAlign: TextAlign.right,
+                                        maxLines: 1,
+                                        style: TextStyle(
+                                            fontSize: 18,
+                                            fontWeight: FontWeight.w700,
+                                            color: Color(0xFF3C3C3C))),
+                                    Row(children: [
+                                      Icon(EvaIcons.star, color: Colors.amber),
+                                      Icon(EvaIcons.star, color: Colors.amber),
+                                      Icon(EvaIcons.star, color: Colors.amber),
+                                      Icon(EvaIcons.star, color: Colors.amber),
+                                      Icon(EvaIcons.star, color: Colors.amber)
+                                    ])
+                                  ]),
+                              Row(children: [
+                                Expanded(
+                                    child: Text(
+                                        "${loadedProduct.currentPrice.toString()} دع",
+                                        overflow: TextOverflow.ellipsis,
+                                        style: TextStyle(
+                                            fontSize: 13,
+                                            color: Alla24Colors.button))),
+                                Expanded(
+                                    child: Text(
+                                  " ${loadedProduct.oldPrice.toString()}دع",
+                                  overflow: TextOverflow.ellipsis,
+                                  style: TextStyle(
+                                      fontSize: 9,
+                                      decoration: TextDecoration.lineThrough),
+                                )),
+                                Spacer(),
+                                Expanded(
+                                    flex: 1,
+                                    child: Text('خصم %8',
+                                        style: TextStyle(
+                                            fontSize: 12,
+                                            color: Alla24Colors.button)))
+                              ])
+                            ])))
+              ])
+        ]));
+  }
+
   _moreProductRelated(List<Product> productsFilterd) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Text('مزيد من المنتجات ذات الصلة',
-            overflow: TextOverflow.ellipsis,
-            style: TextStyle(fontWeight: FontWeight.bold)),
-        Container(
+    return Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
+      Text('مزيد من المنتجات ذات الصلة',
+          overflow: TextOverflow.ellipsis,
+          style: TextStyle(fontWeight: FontWeight.bold)),
+      Container(
           height: MediaQuery.of(context).size.height * 0.35,
           child: ListView.builder(
               scrollDirection: Axis.horizontal,
@@ -177,13 +243,12 @@ class _ProductDetailsState extends State<ProductDetails> {
                   width: MediaQuery.of(context).size.width * 0.4,
                   padding: EdgeInsets.symmetric(horizontal: 5, vertical: 10),
                   child: ChangeNotifierProvider.value(
-                      value: productsFilterd[index], child: SingleProduct()))),
-        )
-      ],
-    );
+                      value: productsFilterd[index],
+                      child: SingleProductVertical()))))
+    ]);
   }
 
-  _androidSizeDropDownButton() {
+  _buildSizeDropDownButton() {
     List<DropdownMenuItem<String>> dropDownItems = [];
     for (String size in sizeList) {
       var newItem = DropdownMenuItem(
@@ -203,7 +268,7 @@ class _ProductDetailsState extends State<ProductDetails> {
                 items: dropDownItems)));
   }
 
-  _androidQuantityDropDownButton() {
+  _buildQuantityDropDownButton() {
     List<DropdownMenuItem<int>> dropDownItems = [];
     for (int quantity in quantityList) {
       var newItem = DropdownMenuItem(

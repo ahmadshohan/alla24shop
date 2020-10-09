@@ -9,4 +9,6 @@ class AppRoute {
   static const editProfileRoute = '/edit-profile';
   static const profileRoute = '/profile';
   static const settingsRoute = '/settings';
+  static const reversionRoute = '/reversion';
+  static const shoppingCartRoute = '/shopping-cart';
 }

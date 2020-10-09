@@ -1,5 +1,4 @@
-import 'package:alla24/app_route.dart';
-import 'package:alla24/shared/widgets/single_product.dart';
+import 'package:alla24/shared/widgets/single_product_vertical.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:alla24/colors.dart';
@@ -253,7 +252,8 @@ class _HomePageState extends State<HomePage>
                     width: MediaQuery.of(context).size.width * 0.4,
                     padding: EdgeInsets.symmetric(horizontal: 5, vertical: 10),
                     child: ChangeNotifierProvider.value(
-                        value: products[index], child: SingleProduct()))),
+                        value: products[index],
+                        child: SingleProductVertical()))),
           )
         ]));
   }
@@ -275,7 +275,8 @@ class _HomePageState extends State<HomePage>
                     width: MediaQuery.of(context).size.width * 0.4,
                     padding: EdgeInsets.symmetric(horizontal: 5, vertical: 10),
                     child: ChangeNotifierProvider.value(
-                        value: products[index], child: SingleProduct()))),
+                        value: products[index],
+                        child: SingleProductVertical()))),
           )
         ]));
   }
@@ -297,7 +298,8 @@ class _HomePageState extends State<HomePage>
                     width: MediaQuery.of(context).size.width * 0.4,
                     padding: EdgeInsets.symmetric(horizontal: 5, vertical: 10),
                     child: ChangeNotifierProvider.value(
-                        value: products[index], child: SingleProduct()))),
+                        value: products[index],
+                        child: SingleProductVertical()))),
           )
         ]));
   }

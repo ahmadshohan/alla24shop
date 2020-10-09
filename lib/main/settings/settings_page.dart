@@ -27,7 +27,7 @@ class _SettingsPageState extends State<SettingsPage> {
             _buildMainMenu(),
             _buildMyOrders(),
             _buildFavorite(),
-            _buildRecover(),
+            _buildReversion(),
             _buildEditProfile(),
             _buildLogout(),
           ])),
@@ -74,31 +74,37 @@ class _SettingsPageState extends State<SettingsPage> {
   }
 
   _buildMainMenu() {
-    return Container(
-        padding: EdgeInsets.only(left: 10, right: 10, top: 20, bottom: 20),
-        child: Row(children: <Widget>[
-          Icon(Icons.location_on, color: Alla24Colors.black),
-          SizedBox(width: 13),
-          Text('القائمة الرئيسية',
-              style: TextStyle(
-                  color: Alla24Colors.black, fontWeight: FontWeight.w500)),
-          Spacer(),
-          Icon(Icons.arrow_forward_ios, color: Alla24Colors.black)
-        ]));
+    return GestureDetector(
+      onTap: () => Navigator.pushReplacementNamed(context, AppRoute.mainRoute),
+      child: Container(
+          padding: EdgeInsets.only(left: 10, right: 10, top: 20, bottom: 20),
+          child: Row(children: <Widget>[
+            Icon(Icons.location_on, color: Alla24Colors.black),
+            SizedBox(width: 13),
+            Text('القائمة الرئيسية',
+                style: TextStyle(
+                    color: Alla24Colors.black, fontWeight: FontWeight.w500)),
+            Spacer(),
+            Icon(Icons.arrow_forward_ios, color: Alla24Colors.black)
+          ])),
+    );
   }
 
   _buildMyOrders() {
-    return Container(
-        padding: EdgeInsets.only(left: 10, right: 10, top: 20, bottom: 20),
-        child: Row(children: <Widget>[
-          Icon(Icons.notifications, color: Alla24Colors.black),
-          SizedBox(width: 13),
-          Text('طلباتي',
-              style: TextStyle(
-                  color: Alla24Colors.black, fontWeight: FontWeight.w500)),
-          Spacer(),
-          Icon(Icons.arrow_forward_ios, color: Alla24Colors.black)
-        ]));
+    return GestureDetector(
+      onTap: () {},
+      child: Container(
+          padding: EdgeInsets.only(left: 10, right: 10, top: 20, bottom: 20),
+          child: Row(children: <Widget>[
+            Icon(Icons.notifications, color: Alla24Colors.black),
+            SizedBox(width: 13),
+            Text('طلباتي',
+                style: TextStyle(
+                    color: Alla24Colors.black, fontWeight: FontWeight.w500)),
+            Spacer(),
+            Icon(Icons.arrow_forward_ios, color: Alla24Colors.black)
+          ])),
+    );
   }
 
   _buildFavorite() {
@@ -119,18 +125,21 @@ class _SettingsPageState extends State<SettingsPage> {
     );
   }
 
-  _buildRecover() {
-    return Container(
-        padding: EdgeInsets.only(left: 10, right: 10, top: 20, bottom: 20),
-        child: Row(children: <Widget>[
-          Icon(Icons.assignment_return, color: Alla24Colors.black),
-          SizedBox(width: 13),
-          Text('الإسترجاع',
-              style: TextStyle(
-                  color: Alla24Colors.black, fontWeight: FontWeight.w500)),
-          Spacer(),
-          Icon(Icons.arrow_forward_ios, color: Alla24Colors.black)
-        ]));
+  _buildReversion() {
+    return GestureDetector(
+      onTap: () => Navigator.of(context).pushNamed(AppRoute.reversionRoute),
+      child: Container(
+          padding: EdgeInsets.only(left: 10, right: 10, top: 20, bottom: 20),
+          child: Row(children: <Widget>[
+            Icon(Icons.assignment_return, color: Alla24Colors.black),
+            SizedBox(width: 13),
+            Text('الإسترجاع',
+                style: TextStyle(
+                    color: Alla24Colors.black, fontWeight: FontWeight.w500)),
+            Spacer(),
+            Icon(Icons.arrow_forward_ios, color: Alla24Colors.black)
+          ])),
+    );
   }
 
   _buildEditProfile() {

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:alla24/provider/products.dart';
-import 'package:alla24/shared/widgets/single_product.dart';
+import 'package:alla24/shared/widgets/single_product_vertical.dart';
 
 class ProductsGrid extends StatelessWidget {
   final List<Product> products;
@@ -18,7 +18,7 @@ class ProductsGrid extends StatelessWidget {
         itemCount: products.length,
         itemBuilder: (context, index) {
           return ChangeNotifierProvider.value(
-              value: products[index], child: SingleProduct());
+              value: products[index], child: SingleProductVertical());
         });
   }
 }
