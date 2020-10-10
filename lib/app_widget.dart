@@ -3,9 +3,11 @@ import 'package:alla24/account/login/login_page.dart';
 import 'package:alla24/account/register/register_page.dart';
 import 'package:alla24/app_route.dart';
 import 'package:alla24/colors.dart';
+import 'package:alla24/main/settings/orders/orders_page.dart';
 import 'package:alla24/main/settings/profile/edit_profile/edit_profile_page.dart';
 import 'package:alla24/main/settings/profile/profile_page.dart';
 import 'package:alla24/main/shopping_cart/shopping_cart_page.dart';
+import 'package:alla24/provider/orders.dart';
 import 'package:alla24/reversion/reversion_page.dart';
 import 'package:alla24/shared/localization/app_localization.dart';
 import 'package:easy_localization/easy_localization.dart';
@@ -35,7 +37,10 @@ class Alla24AppState extends State<Alla24App> {
         statusBarIconBrightness: Brightness.light,
         statusBarBrightness: Brightness.dark));
     return MultiProvider(
-      providers: [ChangeNotifierProvider(create: (ctx) => Products())],
+      providers: [
+        ChangeNotifierProvider(create: (ctx) => Products()),
+        ChangeNotifierProvider(create: (ctx) => Orders()),
+      ],
       child: MaterialApp(
           localizationsDelegates: context.localizationDelegates,
           supportedLocales: context.supportedLocales,
@@ -61,6 +66,7 @@ class Alla24AppState extends State<Alla24App> {
             AppRoute.editProfileRoute: (ctx) => EditProfilePage(),
             AppRoute.reversionRoute: (ctx) => ReversionPage(),
             AppRoute.shoppingCartRoute: (ctx) => ShoppingCartPage(),
+            AppRoute.ordersRoute: (ctx) => OrdersPage(),
           }),
     );
   }

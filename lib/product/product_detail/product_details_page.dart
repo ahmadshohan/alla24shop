@@ -21,7 +21,7 @@ class _ProductDetailsState extends State<ProductDetails> {
   @override
   void initState() {
     super.initState();
-    _controller.init();
+    _controller.init(context);
   }
 
   @override
@@ -34,22 +34,6 @@ class _ProductDetailsState extends State<ProductDetails> {
     final productsFilterd = productList.where((product) {
       return product.category.contains(productCategory);
     }).toList();
-
-    void handleAddCartItem() async {
-      productsData.addCart(
-        productId: loadedProduct.id,
-        title: loadedProduct.name,
-        quantity: _controller.quantity,
-        price: loadedProduct.currentPrice,
-        image: loadedProduct.image,
-        size: _controller.size,
-      );
-      // setState(() {
-      //   selectSize = 'small';
-      //   selectColor = 'red';
-      //   selectQuantity = 1;
-      // });
-    }
 
     return Scaffold(
         body: Observer(
@@ -72,7 +56,7 @@ class _ProductDetailsState extends State<ProductDetails> {
                     ]))
                   ]),
                 ))),
-        bottomNavigationBar: _bottomBuyAddButtons());
+        bottomNavigationBar: _bottomBuyAddButtons(productsData, loadedProduct));
   }
 
   _sliverProductPhotosBar(Product loadedProduct) {
@@ -293,28 +277,36 @@ class _ProductDetailsState extends State<ProductDetails> {
         ));
   }
 
-  _bottomBuyAddButtons() {
+  _bottomBuyAddButtons(Products productsData, Product loadedProduct) {
     return Container(
         padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 10),
         color: Colors.white30,
-        child: Column(
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            Divider(),
-            Row(children: <Widget>[
-              Expanded(
-                  child: JRaisedButton(
-                text: 'اشتري الآن',
-                onPressed: () {},
-              )),
-              SizedBox(width: 15),
-              Expanded(
-                  child: JRaisedButton(
-                text: 'إضافة الى السلة',
-                onPressed: () {},
-              ))
-            ]),
-          ],
-        ));
+        child: Column(mainAxisSize: MainAxisSize.min, children: [
+          Divider(),
+          Row(children: <Widget>[
+            Expanded(
+                child: JRaisedButton(
+                    text: 'اشتري الآن',
+                    onPressed: () {
+                      _controller.handleOrderNow(context);
+                    })),
+            SizedBox(width: 15),
+            Expanded(
+                child: JRaisedButton(
+                    text: 'إضافة الى السلة',
+                    onPressed: () async {
+                      productsData.addCart(
+                        productId: loadedProduct.id,
+                        title: loadedProduct.name,
+                        quantity: _controller.quantity,
+                        currentPrice: loadedProduct.currentPrice,
+                        oldPrice: loadedProduct.oldPrice,
+                        isFavorite: loadedProduct.isFavorite,
+                        image: loadedProduct.image,
+                        size: _controller.size,
+                      );
+                    }))
+          ])
+        ]));
   }
 }

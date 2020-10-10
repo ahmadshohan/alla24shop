@@ -11,4 +11,5 @@ class AppRoute {
   static const settingsRoute = '/settings';
   static const reversionRoute = '/reversion';
   static const shoppingCartRoute = '/shopping-cart';
+  static const ordersRoute = '/orders-page';
 }

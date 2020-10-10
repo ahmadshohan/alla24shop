@@ -117,51 +117,53 @@ class Products with ChangeNotifier {
   int get totalAmount {
     var total = 0;
     _cartItems.forEach((key, cartItem) {
-      total += cartItem.price * cartItem.quantity;
+      total += cartItem.currentPrice * cartItem.quantity;
     });
     return total;
   }
 
-  void increaseCartItemQuantity(String productId) {
-    if (_cartItems.containsKey(productId)) {
-      _cartItems.update(
-          productId,
-          (existingCartItem) => CartItem(
-              id: existingCartItem.id,
-              title: existingCartItem.title,
-              color: existingCartItem.color,
-              size: existingCartItem.size,
-              price: existingCartItem.price,
-              image: existingCartItem.image,
-              quantity: existingCartItem.quantity + 1));
-      notifyListeners();
-    }
-  }
+  // void increaseCartItemQuantity(String productId) {
+  //   if (_cartItems.containsKey(productId)) {
+  //     _cartItems.update(
+  //         productId,
+  //         (existingCartItem) => CartItem(
+  //             id: existingCartItem.id,
+  //             title: existingCartItem.title,
+  //             color: existingCartItem.color,
+  //             size: existingCartItem.size,
+  //             price: existingCartItem.price,
+  //             image: existingCartItem.image,
+  //             quantity: existingCartItem.quantity + 1));
+  //     notifyListeners();
+  //   }
+  // }
 
-  void decreaseCartItemQuantity(String productId) {
-    if (_cartItems.containsKey(productId)) {
-      _cartItems.update(productId, (existingCartItem) {
-        return CartItem(
-            id: existingCartItem.id,
-            title: existingCartItem.title,
-            color: existingCartItem.color,
-            size: existingCartItem.size,
-            price: existingCartItem.price,
-            image: existingCartItem.image,
-            quantity: existingCartItem.quantity > 1
-                ? existingCartItem.quantity - 1
-                : 1);
-      });
-      notifyListeners();
-    }
-  }
+  // void decreaseCartItemQuantity(String productId) {
+  //   if (_cartItems.containsKey(productId)) {
+  //     _cartItems.update(productId, (existingCartItem) {
+  //       return CartItem(
+  //           id: existingCartItem.id,
+  //           title: existingCartItem.title,
+  //           color: existingCartItem.color,
+  //           size: existingCartItem.size,
+  //           price: existingCartItem.price,
+  //           image: existingCartItem.image,
+  //           quantity: existingCartItem.quantity > 1
+  //               ? existingCartItem.quantity - 1
+  //               : 1);
+  //     });
+  //     notifyListeners();
+  //   }
+  // }
 
   void addCart(
       {String productId,
-      int price,
+      int currentPrice,
+      int oldPrice,
+      bool isFavorite,
       String color = 'red',
       String size = 'small',
-      int quantity,
+      int quantity = 1,
       String image,
       String title}) {
     if (cartItems.containsKey(productId)) {
@@ -172,7 +174,9 @@ class Products with ChangeNotifier {
               title: existingCartItem.title,
               color: existingCartItem.color,
               size: existingCartItem.size,
-              price: existingCartItem.price,
+              currentPrice: existingCartItem.currentPrice,
+              oldPrice: existingCartItem.oldPrice,
+              isFavorite: existingCartItem.isFavorite,
               image: existingCartItem.image,
               quantity: existingCartItem.quantity + 1));
     } else {
@@ -182,7 +186,9 @@ class Products with ChangeNotifier {
           title: title,
           color: color,
           size: size,
-          price: price,
+          oldPrice: oldPrice,
+          currentPrice: currentPrice,
+          isFavorite: isFavorite,
           image: image,
           quantity: quantity,
         );
@@ -205,7 +211,10 @@ class Products with ChangeNotifier {
         return CartItem(
             id: existingCart.id,
             title: existingCart.title,
-            price: existingCart.price,
+            currentPrice: existingCart.currentPrice,
+            oldPrice: existingCart.oldPrice,
+            isFavorite: existingCart.isFavorite,
+            image: existingCart.image,
             quantity: existingCart.quantity - 1);
       });
     } else {

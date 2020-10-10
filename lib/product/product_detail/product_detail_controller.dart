@@ -1,5 +1,12 @@
+import 'package:alla24/app_route.dart';
+import 'package:alla24/provider/cart_item.dart';
+import 'package:alla24/provider/orders.dart';
+import 'package:alla24/provider/products.dart';
 import 'package:alla24/shared/services/preferences_service.dart';
+import 'package:alla24/shared/widgets/dialogs/AppDialogs.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:mobx/mobx.dart';
+import 'package:provider/provider.dart';
 
 part 'product_detail_controller.g.dart';
 
@@ -9,10 +16,17 @@ class ProductDetailController = _ProductDetailControllerBase
 abstract class _ProductDetailControllerBase with Store {
   PreferencesService _preferencesService = PreferencesService();
 
-  Future init() async {
+  Future init(BuildContext context) async {
     size = 'small';
     quantity = 1;
+    cart = Provider.of<Products>(context);
+    cartItems = cart.cartItems;
   }
+
+  @observable
+  Products cart = Products();
+  @observable
+  Map<String, CartItem> cartItems = Map();
 
   @observable
   bool loading = false;
@@ -34,5 +48,34 @@ abstract class _ProductDetailControllerBase with Store {
   @action
   void selectedQuantity(int selectedQuantity) {
     quantity = selectedQuantity;
+  }
+
+  @action
+  handleOrderNow(BuildContext context) async {
+    loading = true;
+    Provider.of<Orders>(context, listen: false).addOrder(
+      cart.cartItems.values.toList(),
+      cart.totalAmount,
+    );
+    loading = false;
+    cart.clear();
+    await AppDialogs.successOrderDialog(context);
+    Navigator.pushReplacementNamed(context, AppRoute.ordersRoute);
+  }
+
+  @action
+  handleAddToShoppingCart(Products productsData, Product loadedProduct) {
+    loading = true;
+    productsData.addCart(
+      productId: loadedProduct.id,
+      title: loadedProduct.name,
+      quantity: quantity,
+      currentPrice: loadedProduct.currentPrice,
+      oldPrice: loadedProduct.oldPrice,
+      isFavorite: loadedProduct.isFavorite,
+      image: loadedProduct.image,
+      size: size,
+    );
+    loading = false;
   }
 }
