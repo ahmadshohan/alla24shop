@@ -94,7 +94,7 @@ class _ReversionPageState extends State<ReversionPage> {
               style: TextStyle(color: Colors.black, fontSize: 17)),
           SizedBox(height: 10),
           TextFormField(
-              keyboardType: TextInputType.emailAddress,
+              keyboardType: TextInputType.text,
               textInputAction: TextInputAction.next,
               onFieldSubmitted: (_) {
                 KeyBoard.close(context);

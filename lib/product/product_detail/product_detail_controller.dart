@@ -51,7 +51,7 @@ abstract class _ProductDetailControllerBase with Store {
   }
 
   @action
-  handleOrderNow(BuildContext context) async {
+  handleBuyNow(BuildContext context) async {
     loading = true;
     Provider.of<Orders>(context, listen: false).addOrder(
       cart.cartItems.values.toList(),
@@ -63,19 +63,19 @@ abstract class _ProductDetailControllerBase with Store {
     Navigator.pushReplacementNamed(context, AppRoute.ordersRoute);
   }
 
-  @action
-  handleAddToShoppingCart(Products productsData, Product loadedProduct) {
-    loading = true;
-    productsData.addCart(
-      productId: loadedProduct.id,
-      title: loadedProduct.name,
-      quantity: quantity,
-      currentPrice: loadedProduct.currentPrice,
-      oldPrice: loadedProduct.oldPrice,
-      isFavorite: loadedProduct.isFavorite,
-      image: loadedProduct.image,
-      size: size,
-    );
-    loading = false;
-  }
+  // @action
+  // handleAddToShoppingCart(Products productsData, Product loadedProduct) {
+  //   loading = true;
+  //   productsData.addCart(
+  //     productId: loadedProduct.id,
+  //     title: loadedProduct.name,
+  //     quantity: quantity,
+  //     currentPrice: loadedProduct.currentPrice,
+  //     oldPrice: loadedProduct.oldPrice,
+  //     isFavorite: loadedProduct.isFavorite,
+  //     image: loadedProduct.image,
+  //     size: size,
+  //   );
+  //   loading = false;
+  // }
 }

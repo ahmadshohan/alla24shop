@@ -12,16 +12,20 @@ class JOutlineButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return OutlineButton(
-        onPressed: onPressed,
-        borderSide: BorderSide(color: color),
-        textColor: color,
-        highlightedBorderColor: color,
-        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
-        child: Text(
-          text,
-          overflow: TextOverflow.ellipsis,
-          style: TextStyle(fontSize: 14),
-        ));
+    return SizedBox(
+      height: 45,
+      child: OutlineButton(
+          onPressed: onPressed,
+          borderSide: BorderSide(color: color),
+          textColor: color,
+          highlightedBorderColor: color,
+          shape:
+              RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
+          child: Text(
+            text,
+            overflow: TextOverflow.ellipsis,
+            style: TextStyle(fontSize: 16),
+          )),
+    );
   }
 }

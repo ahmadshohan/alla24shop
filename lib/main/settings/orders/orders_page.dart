@@ -1,6 +1,6 @@
 import 'package:alla24/colors.dart';
-import 'package:alla24/main/settings/orders/single_order.dart';
 import 'package:alla24/provider/orders.dart';
+import 'package:alla24/shared/widgets/single_order.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 

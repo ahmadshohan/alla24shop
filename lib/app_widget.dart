@@ -7,6 +7,10 @@ import 'package:alla24/main/settings/orders/orders_page.dart';
 import 'package:alla24/main/settings/profile/edit_profile/edit_profile_page.dart';
 import 'package:alla24/main/settings/profile/profile_page.dart';
 import 'package:alla24/main/shopping_cart/shopping_cart_page.dart';
+import 'package:alla24/payment/payment_customer_information/payment_customer_information.dart';
+import 'package:alla24/payment/payment_detail/payment_detail.dart';
+
+import 'package:alla24/payment/payment_method/payment_method_page.dart';
 import 'package:alla24/provider/orders.dart';
 import 'package:alla24/reversion/reversion_page.dart';
 import 'package:alla24/shared/localization/app_localization.dart';
@@ -67,6 +71,10 @@ class Alla24AppState extends State<Alla24App> {
             AppRoute.reversionRoute: (ctx) => ReversionPage(),
             AppRoute.shoppingCartRoute: (ctx) => ShoppingCartPage(),
             AppRoute.ordersRoute: (ctx) => OrdersPage(),
+            AppRoute.paymentMethodRoute: (ctx) => PaymentMethodPage(),
+            AppRoute.paymentDetailRoute: (ctx) => PaymentDetailPage(),
+            AppRoute.paymentCustomerInformationRoute: (ctx) =>
+                PaymentCustomerInformationPage(),
           }),
     );
   }

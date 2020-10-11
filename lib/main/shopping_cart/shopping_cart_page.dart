@@ -124,7 +124,8 @@ class _ShoppingCartPageState extends State<ShoppingCartPage> {
                                     shape: RoundedRectangleBorder(
                                         borderRadius:
                                             BorderRadius.circular(12)),
-                                    onPressed: () {},
+                                    onPressed: () => Navigator.pushNamed(
+                                        context, AppRoute.paymentMethodRoute),
                                   )),
                             )
                           ]))

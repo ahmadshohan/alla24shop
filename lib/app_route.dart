@@ -12,4 +12,7 @@ class AppRoute {
   static const reversionRoute = '/reversion';
   static const shoppingCartRoute = '/shopping-cart';
   static const ordersRoute = '/orders-page';
+  static const paymentMethodRoute = '/payment-method';
+  static const paymentDetailRoute = '/payment-detail';
+  static const paymentCustomerInformationRoute = '/payment-customer';
 }

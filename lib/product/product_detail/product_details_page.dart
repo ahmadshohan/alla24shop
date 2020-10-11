@@ -1,3 +1,5 @@
+import 'package:alla24/app_route.dart';
+import 'package:alla24/shared/widgets/dialogs/AppDialogs.dart';
 import 'package:alla24/shared/widgets/j_raised_button.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
@@ -287,9 +289,8 @@ class _ProductDetailsState extends State<ProductDetails> {
             Expanded(
                 child: JRaisedButton(
                     text: 'اشتري الآن',
-                    onPressed: () {
-                      _controller.handleOrderNow(context);
-                    })),
+                    onPressed: () => Navigator.pushNamed(
+                        context, AppRoute.paymentMethodRoute))),
             SizedBox(width: 15),
             Expanded(
                 child: JRaisedButton(
@@ -305,6 +306,7 @@ class _ProductDetailsState extends State<ProductDetails> {
                         image: loadedProduct.image,
                         size: _controller.size,
                       );
+                      AppDialogs.successCartAddedDialog(context);
                     }))
           ])
         ]));
