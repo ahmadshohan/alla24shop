@@ -7,7 +7,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:alla24/colors.dart';
 import 'package:alla24/shared/widgets/app_search_bar.dart';
-import 'package:alla24/shared/widgets/dialogs/AppDialogs.dart';
 import 'package:alla24/shared/widgets/j_raised_button.dart';
 import 'package:alla24/shared/widgets/j_outline_button.dart';
 import 'package:alla24/shared/widgets/loader.dart';
@@ -41,7 +40,7 @@ class _PaymentCustomerInformationPageState
                             child: Column(
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
-                                  SizedBox(height: 30),
+                                  SizedBox(height: 22),
                                   _paymentPlan(),
                                   SizedBox(height: 30),
                                   _buildInputs(),
@@ -55,20 +54,8 @@ class _PaymentCustomerInformationPageState
   }
 
   _paymentPlan() {
-    return Row(children: [
-      Expanded(
-          child: Text('أختر طريقة الدفع',
-              overflow: TextOverflow.ellipsis,
-              style: TextStyle(color: Colors.black, fontSize: 17))),
-      Expanded(
-          child: Text('تفاصيل الدفع',
-              overflow: TextOverflow.ellipsis,
-              style: TextStyle(color: Colors.black, fontSize: 17))),
-      Expanded(
-          child: Text('بيانات المستلم ',
-              overflow: TextOverflow.ellipsis,
-              style: TextStyle(color: Colors.black, fontSize: 17)))
-    ]);
+    return Image.asset('assets/png/payment_c_information.png',
+        fit: BoxFit.cover, width: double.infinity);
   }
 
   _buildInputs() {

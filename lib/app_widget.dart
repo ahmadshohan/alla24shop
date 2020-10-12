@@ -3,6 +3,7 @@ import 'package:alla24/account/login/login_page.dart';
 import 'package:alla24/account/register/register_page.dart';
 import 'package:alla24/app_route.dart';
 import 'package:alla24/colors.dart';
+import 'package:alla24/main/home/huawei/huawei_page.dart';
 import 'package:alla24/main/settings/orders/orders_page.dart';
 import 'package:alla24/main/settings/profile/edit_profile/edit_profile_page.dart';
 import 'package:alla24/main/settings/profile/profile_page.dart';
@@ -65,6 +66,7 @@ class Alla24AppState extends State<Alla24App> {
             AppRoute.loginRoute: (ctx) => LoginPage(),
             AppRoute.forgotPasswordRoute: (ctx) => ForgotPasswordPage(),
             AppRoute.mainRoute: (ctx) => MainNavigator(),
+            AppRoute.huaweiRoute: (ctx) => HuaweiPage(),
             AppRoute.productDetailRoute: (ctx) => ProductDetails(),
             AppRoute.profileRoute: (ctx) => ProfilePage(),
             AppRoute.editProfileRoute: (ctx) => EditProfilePage(),

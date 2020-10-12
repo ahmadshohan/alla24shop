@@ -6,6 +6,7 @@ import 'package:eva_icons_flutter/eva_icons_flutter.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
+import 'package:shimmer/shimmer.dart';
 
 import 'forgot_password_controller.dart';
 
@@ -16,7 +17,7 @@ class ForgotPasswordPage extends StatefulWidget {
 
 class _ForgotPasswordPageState extends State<ForgotPasswordPage> {
   final _formKey = GlobalKey<FormState>();
-  String _logo = 'assets/png/welcome_logo.png';
+  String _logo = 'assets/png/app_logo.png';
   final ForgotPasswordController _forgotPasswordController =
       ForgotPasswordController();
 
@@ -44,7 +45,7 @@ class _ForgotPasswordPageState extends State<ForgotPasswordPage> {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      _buildTitleAndLogo(),
+                      _buildLogo(),
                       SizedBox(height: 50),
                       ..._buildTitles(),
                       SizedBox(height: 20),
@@ -79,29 +80,13 @@ class _ForgotPasswordPageState extends State<ForgotPasswordPage> {
     );
   }
 
-  _buildTitleAndLogo() {
+  _buildLogo() {
     return Padding(
-        padding: const EdgeInsets.symmetric(vertical: 30),
-        child: Column(children: <Widget>[
-          Row(children: <Widget>[
-            Expanded(
-                child: Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: <Widget>[
-                  Image.asset(
-                    _logo,
-                    height: 80,
-                    width: 80,
-                  ),
-                  Text('alla24',
-                      style: TextStyle(
-                        fontSize: 25,
-                        fontWeight: FontWeight.bold,
-                        color: Alla24Colors.black,
-                      ))
-                ]))
-          ])
-        ]));
+        padding: const EdgeInsets.symmetric(vertical: 30, horizontal: 60),
+        child: Image.asset(
+          _logo,
+          fit: BoxFit.cover,
+        ));
   }
 
   _buildTitles() {

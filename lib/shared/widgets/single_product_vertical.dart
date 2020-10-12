@@ -109,7 +109,8 @@ class SingleProductVertical extends StatelessWidget {
                                       shape: RoundedRectangleBorder(
                                           borderRadius:
                                               BorderRadius.circular(12)),
-                                      onPressed: () {},
+                                      onPressed: () => Navigator.pushNamed(
+                                          context, AppRoute.paymentMethodRoute),
                                     ))),
                             SizedBox(width: 20),
                             Expanded(

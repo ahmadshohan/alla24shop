@@ -1,3 +1,4 @@
+
 import 'package:alla24/colors.dart';
 import 'package:alla24/main/category/category_controller.dart';
 import 'package:alla24/provider/products.dart';
@@ -110,12 +111,13 @@ class _CategoryPageState extends State<CategoryPage> {
     return AppBar(
         backgroundColor: Alla24Colors.button,
         leading: IconButton(
-          icon: Icon(
-            EvaIcons.menu,
-            color: Alla24Colors.white,
-          ),
-          onPressed: () {},
-        ),
+            icon: Icon(
+              EvaIcons.menu,
+              color: Alla24Colors.white,
+            ),
+            onPressed: () {
+              Scaffold.of(context).openDrawer();
+            }),
         title: _buildSearchField(),
         actions: [
           IconButton(

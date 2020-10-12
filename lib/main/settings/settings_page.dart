@@ -92,8 +92,7 @@ class _SettingsPageState extends State<SettingsPage> {
 
   _buildMyOrders() {
     return GestureDetector(
-      onTap: () =>
-          Navigator.pushReplacementNamed(context, AppRoute.ordersRoute),
+      onTap: () => Navigator.pushNamed(context, AppRoute.ordersRoute),
       child: Container(
           padding: EdgeInsets.only(left: 10, right: 10, top: 20, bottom: 20),
           child: Row(children: <Widget>[

@@ -1,3 +1,4 @@
+import 'package:alla24/shared/widgets/app_search_bar.dart';
 import 'package:alla24/shared/widgets/single_product_vertical.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -43,7 +44,7 @@ class _HomePageState extends State<HomePage>
     final products = productsData.productsList;
     super.build(context);
     return Scaffold(
-      appBar: _buildFullAppBar(),
+      appBar: AppSearchBar.buildFullAppBar(context),
       body: Observer(
           builder: (_) => SafeArea(
               top: true,
@@ -58,20 +59,16 @@ class _HomePageState extends State<HomePage>
                         child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: <Widget>[
-                          Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: <Widget>[
-                                _buildSliderCarousel(),
-                                SizedBox(height: 12),
-                                _buildCategoryHorizentalList(),
-                                _buildLastProductList(products),
-                                SizedBox(height: 12),
-                                _buildTodayProductList(products),
-                                SizedBox(height: 12),
-                                _buildNewProductList(products),
-                                SizedBox(height: 12),
-                                _buildNewProductList(products),
-                              ])
+                          _buildSliderCarousel(),
+                          SizedBox(height: 12),
+                          _buildCategoryHorizentalList(),
+                          _buildLastProductList(products),
+                          SizedBox(height: 12),
+                          _buildTodayProductList(products),
+                          SizedBox(height: 12),
+                          _buildNewProductList(products),
+                          SizedBox(height: 12),
+                          _buildNewProductList(products),
                         ]))),
                 Visibility(
                     visible: _controller.loading,
@@ -116,12 +113,13 @@ class _HomePageState extends State<HomePage>
   _buildFullAppBar() {
     return AppBar(
         backgroundColor: Alla24Colors.button,
+        automaticallyImplyLeading: false,
         leading: IconButton(
           icon: Icon(
             EvaIcons.menu,
             color: Alla24Colors.white,
           ),
-          onPressed: () {},
+          onPressed: () => Scaffold.of(context).openDrawer(),
         ),
         title: _buildSearchField(),
         actions: [
@@ -137,74 +135,68 @@ class _HomePageState extends State<HomePage>
 
   _buildSliderCarousel() {
     return GestureDetector(
-      onTap: () {},
-      child: Stack(children: [
-        SizedBox(
-            height: MediaQuery.of(context).size.height * 0.27,
-            width: double.infinity,
-            child: Carousel(
-              images: [
-                ExactAssetImage("assets/png/temp_news.png"),
-                ExactAssetImage("assets/png/temp_news.png"),
-              ],
-              // images: _controller.sliderData
-              //     .map((slider) => GestureDetector(
-              //         onTap: () => Navigator.of(context).pushNamed(
-              //             AppRoute.musicPlayerRoute,
-              //             arguments: slider),
-              //         child: slider.contents?.avatar1 != null
-              //             ? CachedNetworkImage(
-              //                 imageUrl:
-              //                     "${SocialMedia.urlPrefix + slider.contents.avatar1}")
-              //             : AssetImage("assets/png/temp_news.png")
-              // CachedNetworkImage(
-              //     imageUrl:
-              //     'https://cdn-images-1.medium.com/max/2000/1*wnIEgP1gNMrK5gZU7QS0-A.jpeg'),
-              // ExactAssetImage("assets/page_design/home_page.jpeg"),
-              // ))
-              // .toList(),
-              dotSize: 4.0,
-              dotSpacing: 15.0,
-              dotColor: Colors.deepOrange,
-              dotPosition: DotPosition.bottomCenter,
-              indicatorBgPadding: 5.0,
-              borderRadius: true,
-              moveIndicatorFromBottom: 180.0,
-              noRadiusForIndicator: true,
-            )),
-        Positioned(
-            right: 10,
-            top: 50,
-            child:
-                Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-              Text(
-                'عرض الملابس الرياضية',
-                overflow: TextOverflow.ellipsis,
-                style: TextStyle(
-                    color: Colors.white,
-                    fontSize: 19,
-                    fontWeight: FontWeight.bold),
-              ),
-              Text(
-                'اقوى العروض على احدث الملابس',
-                overflow: TextOverflow.ellipsis,
-                style: TextStyle(
-                    color: Colors.white,
-                    fontSize: 15,
-                    fontWeight: FontWeight.w500),
-              ),
-              RaisedButton(
-                color: Alla24Colors.sliderButton,
-                onPressed: () {},
-                padding: const EdgeInsets.symmetric(vertical: 5),
-                textColor: Alla24Colors.black,
-                shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(12)),
-                child: Text('احصل عليه'),
-              )
-            ]))
-      ]),
-    );
+        onTap: () {},
+        child: Stack(children: [
+          SizedBox(
+              height: MediaQuery.of(context).size.height * 0.27,
+              width: double.infinity,
+              child: Carousel(
+                  images: [
+                    ExactAssetImage("assets/png/temp_news.png"),
+                    ExactAssetImage("assets/png/temp_news.png"),
+                  ],
+                  // images: _controller.sliderData
+                  //     .map((slider) => GestureDetector(
+                  //         onTap: () => Navigator.of(context).pushNamed(
+                  //             AppRoute.musicPlayerRoute,
+                  //             arguments: slider),
+                  //         child: slider.contents?.avatar1 != null
+                  //             ? CachedNetworkImage(
+                  //                 imageUrl:
+                  //                     "${SocialMedia.urlPrefix + slider.contents.avatar1}")
+                  //             : AssetImage("assets/png/temp_news.png")
+                  // CachedNetworkImage(
+                  //     imageUrl:
+                  //     'https://cdn-images-1.medium.com/max/2000/1*wnIEgP1gNMrK5gZU7QS0-A.jpeg'),
+                  // ExactAssetImage("assets/page_design/home_page.jpeg"),
+                  // ))
+                  // .toList(),
+                  dotSize: 4.0,
+                  dotSpacing: 15.0,
+                  dotColor: Alla24Colors.button,
+                  dotPosition: DotPosition.bottomCenter,
+                  indicatorBgPadding: 5.0,
+                  borderRadius: true,
+                  moveIndicatorFromBottom: 180.0,
+                  noRadiusForIndicator: true)),
+          Positioned(
+              right: 10,
+              top: 50,
+              child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text('عرض الملابس الرياضية',
+                        overflow: TextOverflow.ellipsis,
+                        style: TextStyle(
+                            color: Colors.white,
+                            fontSize: 19,
+                            fontWeight: FontWeight.bold)),
+                    Text('اقوى العروض على احدث الملابس',
+                        overflow: TextOverflow.ellipsis,
+                        style: TextStyle(
+                            color: Colors.white,
+                            fontSize: 15,
+                            fontWeight: FontWeight.w500)),
+                    RaisedButton(
+                        color: Alla24Colors.sliderButton,
+                        onPressed: () {},
+                        padding: const EdgeInsets.symmetric(vertical: 5),
+                        textColor: Alla24Colors.black,
+                        shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(12)),
+                        child: Text('احصل عليه'))
+                  ]))
+        ]));
   }
 
   _buildCategoryHorizentalList() {
@@ -218,20 +210,18 @@ class _HomePageState extends State<HomePage>
               onTap: () {},
               child: Container(
                   width: MediaQuery.of(context).size.width * 0.15,
-                  child: Column(
-                    children: [
-                      CircleAvatar(
-                        radius: 25,
-                        backgroundColor: Alla24Colors.button,
-                        child: Icon(EvaIcons.phone),
-                      ),
-                      Padding(
-                          padding: const EdgeInsets.only(top: 3),
-                          child: Text("هواتف ذكية",
-                              textAlign: TextAlign.center,
-                              style: TextStyle(fontSize: 12)))
-                    ],
-                  ))),
+                  child: Column(children: [
+                    CircleAvatar(
+                      radius: 25,
+                      backgroundColor: Alla24Colors.button,
+                      child: Icon(EvaIcons.phone),
+                    ),
+                    Padding(
+                        padding: const EdgeInsets.only(top: 3),
+                        child: Text("هواتف ذكية",
+                            textAlign: TextAlign.center,
+                            style: TextStyle(fontSize: 12)))
+                  ]))),
         ));
   }
 
@@ -244,17 +234,17 @@ class _HomePageState extends State<HomePage>
             Text("رؤية الكل", style: TextStyle(color: Alla24Colors.button))
           ]),
           Expanded(
-            child: ListView.builder(
-                scrollDirection: Axis.horizontal,
-                shrinkWrap: true,
-                itemCount: products.length,
-                itemBuilder: (ctx, index) => Container(
-                    width: MediaQuery.of(context).size.width * 0.4,
-                    padding: EdgeInsets.symmetric(horizontal: 5, vertical: 10),
-                    child: ChangeNotifierProvider.value(
-                        value: products[index],
-                        child: SingleProductVertical()))),
-          )
+              child: ListView.builder(
+                  scrollDirection: Axis.horizontal,
+                  shrinkWrap: true,
+                  itemCount: products.length,
+                  itemBuilder: (ctx, index) => Container(
+                      width: MediaQuery.of(context).size.width * 0.4,
+                      padding:
+                          EdgeInsets.symmetric(horizontal: 5, vertical: 10),
+                      child: ChangeNotifierProvider.value(
+                          value: products[index],
+                          child: SingleProductVertical()))))
         ]));
   }
 
@@ -267,17 +257,17 @@ class _HomePageState extends State<HomePage>
             Text("رؤية الكل", style: TextStyle(color: Alla24Colors.button))
           ]),
           Expanded(
-            child: ListView.builder(
-                scrollDirection: Axis.horizontal,
-                shrinkWrap: true,
-                itemCount: products.length,
-                itemBuilder: (ctx, index) => Container(
-                    width: MediaQuery.of(context).size.width * 0.4,
-                    padding: EdgeInsets.symmetric(horizontal: 5, vertical: 10),
-                    child: ChangeNotifierProvider.value(
-                        value: products[index],
-                        child: SingleProductVertical()))),
-          )
+              child: ListView.builder(
+                  scrollDirection: Axis.horizontal,
+                  shrinkWrap: true,
+                  itemCount: products.length,
+                  itemBuilder: (ctx, index) => Container(
+                      width: MediaQuery.of(context).size.width * 0.4,
+                      padding:
+                          EdgeInsets.symmetric(horizontal: 5, vertical: 10),
+                      child: ChangeNotifierProvider.value(
+                          value: products[index],
+                          child: SingleProductVertical()))))
         ]));
   }
 

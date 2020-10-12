@@ -39,8 +39,9 @@ class _PaymentMethodPageState extends State<PaymentMethodPage> {
                             child: Column(
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
-                                  SizedBox(height: 30),
+                                  SizedBox(height: 10),
                                   _paymentPlan(),
+                                  SizedBox(height: 5),
                                   _buildAsyaCard(),
                                   _buildZeinCard(),
                                   _buildReceivePayCard()
@@ -54,20 +55,25 @@ class _PaymentMethodPageState extends State<PaymentMethodPage> {
   }
 
   _paymentPlan() {
-    return Row(children: [
-      Expanded(
-          child: Text('أختر طريقة الدفع',
-              overflow: TextOverflow.ellipsis,
-              style: TextStyle(color: Colors.black, fontSize: 17))),
-      Expanded(
-          child: Text('تفاصيل الدفع',
-              overflow: TextOverflow.ellipsis,
-              style: TextStyle(color: Colors.black, fontSize: 17))),
-      Expanded(
-          child: Text('بيانات المستلم ',
-              overflow: TextOverflow.ellipsis,
-              style: TextStyle(color: Colors.black, fontSize: 17)))
-    ]);
+    return Image.asset('assets/png/payment_method.png',
+            fit: BoxFit.cover, width: double.infinity)
+
+        //   Row(children: [
+        //   Expanded(
+        //       child: Text('أختر طريقة الدفع',
+        //           overflow: TextOverflow.ellipsis,
+        //           style: TextStyle(color: Colors.black, fontSize: 17))),
+        //   Expanded(
+        //       child: Text('تفاصيل الدفع',
+        //           overflow: TextOverflow.ellipsis,
+        //           style: TextStyle(color: Colors.black, fontSize: 17))),
+        //   Expanded(
+        //       child: Text('بيانات المستلم ',
+        //           overflow: TextOverflow.ellipsis,
+        //           style: TextStyle(color: Colors.black, fontSize: 17)))
+        // ])
+
+        ;
   }
 
   _buildAsyaCard() {

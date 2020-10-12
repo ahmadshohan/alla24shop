@@ -1,4 +1,5 @@
 import 'package:alla24/app_route.dart';
+import 'package:alla24/product/product_detail/widgets/peoduct_detail_tab_bar.dart';
 import 'package:alla24/shared/widgets/dialogs/AppDialogs.dart';
 import 'package:alla24/shared/widgets/j_raised_button.dart';
 import 'package:flutter/material.dart';
@@ -54,6 +55,7 @@ class _ProductDetailsState extends State<ProductDetails> {
                       _buildSingleProductWithoutPicture(loadedProduct),
                       _buildSizeDropDownButton(),
                       _buildQuantityDropDownButton(),
+                      _buildProductDetailTabBar(loadedProduct),
                       _moreProductRelated(productsFilterd)
                     ]))
                   ]),
@@ -88,9 +90,7 @@ class _ProductDetailsState extends State<ProductDetails> {
                                         MainAxisAlignment.spaceBetween,
                                     children: [
                                       IconButton(
-                                          icon: Icon(
-                                            EvaIcons.arrowForward,
-                                          ),
+                                          icon: Icon(EvaIcons.arrowForward),
                                           onPressed: () =>
                                               Navigator.pop(context)),
                                       IconButton(
@@ -116,8 +116,11 @@ class _ProductDetailsState extends State<ProductDetails> {
                                         color: loadedProduct.isFavorite
                                             ? Colors.red
                                             : Colors.black),
-                                    onPressed: () =>
-                                        loadedProduct.toggleFavoriteStatus()),
+                                    onPressed: () {
+                                      setState(() {
+                                        loadedProduct.toggleFavoriteStatus();
+                                      });
+                                    }),
                                 Expanded(
                                     child: Row(children: [
                                   Expanded(
@@ -133,18 +136,18 @@ class _ProductDetailsState extends State<ProductDetails> {
   _huaweiTextAvatar() {
     return Padding(
         padding: EdgeInsets.symmetric(vertical: 5),
-        child: Row(children: [
-          CircleAvatar(
-              radius: 40,
-              backgroundColor: Colors.black12,
-              child: ClipRRect(
-                borderRadius: BorderRadius.circular(100),
-                child: Image.asset('assets/png/avatar.png',
-                    width: 100, height: 100, fit: BoxFit.cover),
-              )),
-          SizedBox(width: 10),
-          Text('HUAWEI')
-        ]));
+        child: GestureDetector(
+          onTap: () => Navigator.pushNamed(context, AppRoute.huaweiRoute),
+          child: Row(children: [
+            CircleAvatar(
+                radius: 40,
+                backgroundColor: Alla24Colors.huaweiBg,
+                child: Image.asset('assets/png/Huawei_Logo.png',
+                    width: 120, height: 120)),
+            SizedBox(width: 10),
+            Text('HUAWEI')
+          ]),
+        ));
   }
 
   _buildSingleProductWithoutPicture(Product loadedProduct) {
@@ -262,21 +265,23 @@ class _ProductDetailsState extends State<ProductDetails> {
           value: quantity);
       dropDownItems.add(newItem);
     }
-    return Directionality(
-        textDirection: TextDirection.rtl,
-        child: Card(
-          child: Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 5),
-              child: DropdownButton<int>(
-                  isExpanded: true,
-                  elevation: 7,
-                  hint: Text('الكمية'),
-                  onChanged: (selectedQuantity) {
-                    _controller.selectedQuantity(selectedQuantity);
-                  },
-                  value: _controller.quantity,
-                  items: dropDownItems)),
-        ));
+    return Card(
+      child: Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 5),
+          child: DropdownButton<int>(
+              isExpanded: true,
+              elevation: 7,
+              hint: Text('الكمية'),
+              onChanged: (selectedQuantity) {
+                _controller.selectedQuantity(selectedQuantity);
+              },
+              value: _controller.quantity,
+              items: dropDownItems)),
+    );
+  }
+
+  _buildProductDetailTabBar(Product loadedProduct) {
+    return ProductDetailTabsBar(loadedProduct);
   }
 
   _bottomBuyAddButtons(Products productsData, Product loadedProduct) {

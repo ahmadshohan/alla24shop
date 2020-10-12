@@ -18,7 +18,7 @@ class LoginPage extends StatefulWidget {
 class _LoginPageState extends State<LoginPage> {
   LoginController _loginController = LoginController();
   final _formKey = GlobalKey<FormState>();
-  String _logo = 'assets/png/welcome_logo.png';
+  String _logo = 'assets/png/app_logo.png';
   FocusNode _emailFocusNode = FocusNode();
   FocusNode _passwordFocusNode = FocusNode();
   @override
@@ -50,7 +50,7 @@ class _LoginPageState extends State<LoginPage> {
                         child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
-                          _buildTitleAndLogo(),
+                          _buildLogo(),
                           SizedBox(height: 10),
                           Padding(
                               padding:
@@ -87,33 +87,13 @@ class _LoginPageState extends State<LoginPage> {
                 ])));
   }
 
-  _buildTitleAndLogo() {
+  _buildLogo() {
     return Padding(
-        padding: const EdgeInsets.symmetric(vertical: 30),
-        child: Column(children: <Widget>[
-          Row(children: <Widget>[
-            Expanded(
-                child: Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: <Widget>[
-                  Shimmer.fromColors(
-                      baseColor: Alla24Colors.white,
-                      highlightColor: Alla24Colors.button,
-                      enabled: true,
-                      child: Image.asset(_logo, height: 80, width: 80)),
-                  Shimmer.fromColors(
-                      baseColor: Alla24Colors.white,
-                      highlightColor: Colors.grey,
-                      enabled: true,
-                      child: Text('alla24',
-                          style: TextStyle(
-                            fontSize: 25,
-                            fontWeight: FontWeight.bold,
-                            color: Alla24Colors.black,
-                          )))
-                ]))
-          ])
-        ]));
+        padding: const EdgeInsets.symmetric(vertical: 30, horizontal: 60),
+        child: Image.asset(
+          _logo,
+          fit: BoxFit.cover,
+        ));
   }
 
   _buildInputs() {

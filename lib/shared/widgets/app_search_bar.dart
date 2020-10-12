@@ -12,7 +12,7 @@ class AppSearchBar {
             EvaIcons.menu,
             color: Alla24Colors.white,
           ),
-          onPressed: () {},
+          onPressed: () => Scaffold.of(context).openDrawer(),
         ),
         title: Padding(
             padding: const EdgeInsets.symmetric(vertical: 15.0, horizontal: 5),

@@ -12,6 +12,7 @@ class Alla24Colors {
   static const flexibleBarCategoryAlbumsGradientHigh = const Color(0xff1E1E1C);
   static const cardItemBg = const Color(0xffECEEF0);
   static const sliderButton = const Color(0xffE08C1A);
+  static const huaweiBg = const Color(0xffF1F1F1);
 
   static const tabBackGround = const Color(0xff333333);
 

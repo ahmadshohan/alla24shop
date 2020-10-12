@@ -19,7 +19,7 @@ class RegisterPage extends StatefulWidget {
 
 class _RegisterPageState extends State<RegisterPage> {
   final _formKey = GlobalKey<FormState>();
-  String _logo = 'assets/png/welcome_logo.png';
+  String _logo = 'assets/png/app_logo.png';
   RegisterController _registerController = RegisterController();
   FocusNode _nameFN = FocusNode();
   FocusNode _telefonNumberFN = FocusNode();
@@ -60,7 +60,7 @@ class _RegisterPageState extends State<RegisterPage> {
                           child: Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
-                            _buildTitleAndLogo(),
+                            _buildLogo(),
                             Padding(
                                 padding:
                                     const EdgeInsets.symmetric(vertical: 5),
@@ -88,37 +88,13 @@ class _RegisterPageState extends State<RegisterPage> {
                 ])));
   }
 
-  _buildTitleAndLogo() {
+  _buildLogo() {
     return Padding(
-        padding: const EdgeInsets.symmetric(vertical: 5, horizontal: 20),
-        child: Column(children: <Widget>[
-          Row(children: <Widget>[
-            Expanded(
-                child: Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: <Widget>[
-                  Shimmer.fromColors(
-                      baseColor: Alla24Colors.black,
-                      highlightColor: Alla24Colors.button,
-                      enabled: true,
-                      child: Image.asset(
-                        _logo,
-                        height: 80,
-                        width: 80,
-                      )),
-                  Shimmer.fromColors(
-                      baseColor: Alla24Colors.black,
-                      highlightColor: Colors.grey,
-                      enabled: true,
-                      child: Text('alla24',
-                          style: TextStyle(
-                            fontSize: 25,
-                            fontWeight: FontWeight.bold,
-                            color: Colors.black,
-                          )))
-                ]))
-          ]),
-        ]));
+        padding: const EdgeInsets.symmetric(vertical: 5, horizontal: 60),
+        child: Image.asset(
+          _logo,
+          fit: BoxFit.cover,
+        ));
   }
 
   _buildInputs() {

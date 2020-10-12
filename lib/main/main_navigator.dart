@@ -1,15 +1,16 @@
 import 'package:alla24/colors.dart';
 import 'package:alla24/main/category/category_page.dart';
 import 'package:alla24/main/favorite/favorite_page.dart';
+import 'package:alla24/main/home/home_page.dart';
 import 'package:alla24/main/settings/settings_page.dart';
 import 'package:alla24/main/shopping_cart/shopping_cart_page.dart';
+import 'package:alla24/shared/widgets/alla24_drawer.dart';
+import 'package:alla24/shared/widgets/closable.dart';
 import 'package:animations/animations.dart';
 import 'package:eva_icons_flutter/eva_icons_flutter.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-
-import 'home/home_page.dart';
 
 class MainNavigator extends StatefulWidget {
   @override
@@ -21,6 +22,12 @@ class _MainNavigatorState extends State<MainNavigator> {
   int _selectedIndex = 0;
 
   @override
+  void dispose() {
+    super.dispose();
+    KeyBoard.close(context);
+  }
+
+  @override
   Widget build(BuildContext context) {
     SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
         statusBarColor: Colors.transparent,
@@ -29,10 +36,8 @@ class _MainNavigatorState extends State<MainNavigator> {
             : Brightness.light));
     return Scaffold(
         backgroundColor: Alla24Colors.white,
-        body: Directionality(
-          textDirection: TextDirection.rtl,
-          child: _buildPageViewBuilder(),
-        ),
+        body: _buildPageViewBuilder(),
+        drawer: Alla24Drawer(),
         bottomNavigationBar: Directionality(
           textDirection: TextDirection.rtl,
           child: Container(

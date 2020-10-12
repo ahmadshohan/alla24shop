@@ -15,4 +15,5 @@ class AppRoute {
   static const paymentMethodRoute = '/payment-method';
   static const paymentDetailRoute = '/payment-detail';
   static const paymentCustomerInformationRoute = '/payment-customer';
+  static const huaweiRoute = '/huawei';
 }

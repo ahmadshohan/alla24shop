@@ -12,11 +12,12 @@ class Alla24Logo extends StatelessWidget {
   Widget build(BuildContext context) {
     Widget image;
     if (height == null)
-      image = Image.asset('assets/png/alla24logo.png');
+      image = Image.asset('assets/png/app_logo.png');
     else
-      image = Image.asset('assets/png/alla24logo.png', height: height);
+      image = Image.asset('assets/png/app_logo.png', height: height);
 
     return Container(
+      height: 100,
       margin: margin ?? const EdgeInsets.all(0),
       padding: padding ?? const EdgeInsets.all(0),
       child: image,

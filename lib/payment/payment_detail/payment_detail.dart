@@ -28,18 +28,19 @@ class _PaymentDetailPageState extends State<PaymentDetailPage> {
                     bottom: true,
                     left: false,
                     right: false,
-                    child: Padding(
-                        padding: EdgeInsets.all(10),
-                        child: SingleChildScrollView(
-                          child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                SizedBox(height: 30),
-                                _paymentPlan(),
-                                SizedBox(height: 30),
-                                _buildInputs()
-                              ]),
-                        ))),
+                    child: SingleChildScrollView(
+                      child: Padding(
+                        padding: const EdgeInsets.all(10),
+                        child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              SizedBox(height: 25),
+                              _paymentPlan(),
+                              SizedBox(height: 30),
+                              _buildInputs()
+                            ]),
+                      ),
+                    )),
                 Visibility(
                     visible: _controller.loading,
                     child: Center(child: Loader()))
@@ -49,20 +50,8 @@ class _PaymentDetailPageState extends State<PaymentDetailPage> {
   }
 
   _paymentPlan() {
-    return Row(children: [
-      Expanded(
-          child: Text('أختر طريقة الدفع',
-              overflow: TextOverflow.ellipsis,
-              style: TextStyle(color: Colors.black, fontSize: 17))),
-      Expanded(
-          child: Text('تفاصيل الدفع',
-              overflow: TextOverflow.ellipsis,
-              style: TextStyle(color: Colors.black, fontSize: 17))),
-      Expanded(
-          child: Text('بيانات المستلم ',
-              overflow: TextOverflow.ellipsis,
-              style: TextStyle(color: Colors.black, fontSize: 17)))
-    ]);
+    return Image.asset('assets/png/payment_detail.png',
+        fit: BoxFit.cover, width: double.infinity);
   }
 
   _buildInputs() {
